@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL 2026 - Match Predictions & Schedule</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ipl-blue: #1a237e;
+            --ipl-gold: #ffd700;
+            --ipl-orange: #ff6b35;
+            --dark-bg: #0a0e27;
+            --card-bg: rgba(26, 35, 126, 0.15);
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a237e 50%, #0d1429 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .cricket-ball {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #ff6b35, #d84315);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3);
+        }
+
+        .cricket-ball:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .cricket-ball:nth-child(2) { top: 70%; left: 80%; animation-delay: 5s; width: 40px; height: 40px; }
+        .cricket-ball:nth-child(3) { top: 40%; left: 60%; animation-delay: 10s; width: 80px; height: 80px; }
+        .cricket-ball:nth-child(4) { top: 80%; left: 20%; animation-delay: 15s; width: 50px; height: 50px; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, rgba(26,35,126,0.9) 0%, rgba(13,20,41,0.95) 100%);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--ipl-gold);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--ipl-gold), #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--ipl-blue);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255,215,0,0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(255,215,0,0.8); }
+        }
+
+        .logo-text h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, var(--ipl-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .logo-text p {
+            color: #8892b0;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-tabs a{
+             text-decoration: none;
+             color: rgb(32, 20, 94);
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            background: var(--glass);
+            border: 1px solid rgba(255,215,0,0.3);
+            color: #fff;
+            cursor: pointer;
+            border-radius: 30px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: linear-gradient(135deg, var(--ipl-gold), #ff8c00);
+            color: var(--ipl-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,215,0,0.4);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Stats Overview */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,215,0,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--ipl-gold);
+        }
+
+        .stat-card.clickable {
+            background: linear-gradient(135deg, rgba(76,175,80,0.2), rgba(76,175,80,0.1));
+            border-color: rgba(76,175,80,0.5);
+        }
+
+        .stat-card.clickable:hover {
+            background: linear-gradient(135deg, rgba(76,175,80,0.3), rgba(76,175,80,0.2));
+            box-shadow: 0 10px 30px rgba(76,175,80,0.3);
+        }
+
+        .stat-number {
+            font-family: 'Teko', sans-serif;
+            font-size: 48px;
+            color: var(--ipl-gold);
+            line-height: 1;
+        }
+
+        .stat-card.clickable .stat-number {
+            color: #4caf50;
+        }
+
+        .stat-label {
+            color: #8892b0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-label {
+            color: var(--ipl-gold);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,215,0,0.3);
+            color: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, var(--ipl-gold), #ff8c00);
+            color: var(--ipl-blue);
+            border-color: var(--ipl-gold);
+        }
+
+        .filter-btn.clear {
+            background: rgba(244,67,54,0.2);
+            border-color: rgba(244,67,54,0.5);
+            color: #f44336;
+        }
+
+        .filter-btn.clear:hover {
+            background: #f44336;
+            color: #fff;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(180deg, var(--ipl-gold), var(--ipl-orange));
+            border-radius: 2px;
+        }
+
+        .section-header h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .section-header p {
+            color: #8892b0;
+            font-size: 16px;
+        }
+
+        /* Match Cards Grid */
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .match-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .match-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .match-card:hover::before {
+            left: 100%;
+        }
+
+        .match-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,215,0,0.2);
+            border-color: var(--ipl-gold);
+        }
+
+        .match-card.predicted {
+            border-color: #4caf50;
+            box-shadow: 0 0 20px rgba(76,175,80,0.3);
+        }
+
+        .match-card.completed {
+            border-color: #2196f3;
+            background: rgba(33,150,243,0.1);
+        }
+
+        .match-card.correct-prediction {
+            border-color: #4caf50;
+            box-shadow: 0 0 20px rgba(76,175,80,0.4);
+        }
+
+        .match-card.wrong-prediction {
+            border-color: #f44336;
+            box-shadow: 0 0 20px rgba(244,67,54,0.4);
+        }
+
+        .match-header {
+            background: linear-gradient(90deg, rgba(26,35,126,0.8), rgba(13,20,41,0.9));
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,215,0,0.2);
+        }
+
+        .match-number {
+            font-family: 'Teko', sans-serif;
+            font-size: 24px;
+            color: var(--ipl-gold);
+        }
+
+        .match-date {
+            font-size: 14px;
+            color: #8892b0;
+            font-weight: 600;
+        }
+
+        .match-teams {
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .team {
+            flex: 1;
+            text-align: center;
+        }
+
+        .team-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255,215,0,0.3);
+            transition: all 0.3s ease;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .match-card:hover .team-logo {
+            transform: scale(1.1);
+            border-color: var(--ipl-gold);
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        .team-name {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .team-short {
+            color: #8892b0;
+            font-size: 12px;
+        }
+
+        .vs-divider {
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+            color: var(--ipl-orange);
+            position: relative;
+        }
+
+        .vs-divider::before, .vs-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ipl-orange));
+        }
+
+        .vs-divider::before { right: 100%; margin-right: 10px; }
+        .vs-divider::after { left: 100%; margin-left: 10px; background: linear-gradient(90deg, var(--ipl-orange), transparent); }
+
+        .match-footer {
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .venue {
+            color: #8892b0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .prediction-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .prediction-status.pending {
+            background: rgba(255,107,53,0.2);
+            color: var(--ipl-orange);
+        }
+
+        .prediction-status.completed {
+            background: rgba(76,175,80,0.2);
+            color: #4caf50;
+        }
+
+        .match-result {
+            background: linear-gradient(135deg, rgba(33,150,243,0.3), rgba(33,150,243,0.1));
+            border: 1px solid rgba(33,150,243,0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #2196f3;
+            text-align: center;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .prediction-accuracy {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 15px;
+        }
+
+        .prediction-accuracy.correct {
+            background: rgba(76,175,80,0.2);
+            color: #4caf50;
+        }
+
+        .prediction-accuracy.wrong {
+            background: rgba(244,67,54,0.2);
+            color: #f44336;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: linear-gradient(135deg, #1a237e 0%, #0d1429 100%);
+            border-radius: 25px;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
+            border: 2px solid var(--ipl-gold);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: linear-gradient(90deg, rgba(26,35,126,0.9), rgba(13,20,41,0.95));
+            padding: 25px;
+            border-bottom: 2px solid var(--ipl-gold);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: var(--ipl-orange);
+            transform: rotate(90deg);
+        }
+
+        .modal-match-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .modal-team {
+            text-align: center;
+            flex: 1;
+        }
+
+        .modal-team-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--ipl-gold);
+            box-shadow: 0 0 30px rgba(255,215,0,0.3);
+            background: #fff;
+        }
+
+        .modal-team-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-team-name {
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+        }
+
+        .modal-vs {
+            font-family: 'Teko', sans-serif;
+            font-size: 48px;
+            color: var(--ipl-orange);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .prediction-section {
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .prediction-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 24px;
+            color: var(--ipl-gold);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .prediction-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--ipl-gold);
+            border-radius: 2px;
+        }
+
+        /* Winner Options */
+        .winner-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .winner-card {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .winner-card:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        .winner-card.selected {
+            border-color: var(--ipl-gold);
+            background: rgba(255,215,0,0.15);
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        .winner-card h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .winner-card p {
+            color: #8892b0;
+            font-size: 14px;
+        }
+
+        /* Both Innings Container */
+        .both-innings-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .both-innings-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .innings-box {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .innings-box.active {
+            border-color: var(--ipl-gold);
+            background: rgba(255,215,0,0.1);
+        }
+
+        .innings-header {
+            font-family: 'Teko', sans-serif;
+            font-size: 22px;
+            color: var(--ipl-gold);
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+            padding-bottom: 10px;
+        }
+
+        /* Powerplay Section Grid */
+        .powerplay-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Powerplay Score Grid - Updated for 10-run windows */
+        .powerplay-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .score-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .score-option:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.05);
+        }
+
+        .score-option.selected {
+             border-color: #2196f3;
+            background: rgba(33,150,243,0.2);
+            color: #2196f3;
+            box-shadow: 0 0 15px rgba(33,150,243,0.3);
+        }
+
+        /* Wickets Grid - Updated for 3-wicket windows */
+        .wickets-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .wicket-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .wicket-option:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.05);
+        }
+
+        .wicket-option.selected {
+            border-color: #e91e63;
+            background: rgba(233,30,99,0.2);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(233,30,99,0.3);
+        }
+
+        /* Total Score Grid - Updated for 25-run windows */
+        .total-score-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .total-score-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .total-score-option:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.05);
+        }
+
+        .total-score-option.selected {
+            border-color: #2196f3;
+            background: rgba(33,150,243,0.2);
+            color: #2196f3;
+            box-shadow: 0 0 15px rgba(33,150,243,0.3);
+        }
+
+        .section-subtitle {
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .save-prediction-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--ipl-gold), #ff8c00);
+            border: none;
+            border-radius: 12px;
+            color: var(--ipl-blue);
+            font-family: 'Teko', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .save-prediction-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+        }
+
+        /* My Predictions Section */
+        .predictions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .prediction-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .prediction-item:hover {
+            border-color: var(--ipl-gold);
+            transform: translateX(5px);
+        }
+
+        .prediction-item.correct {
+            border-color: #4caf50;
+            background: rgba(76,175,80,0.1);
+        }
+
+        .prediction-item.wrong {
+            border-color: #f44336;
+            background: rgba(244,67,54,0.1);
+        }
+
+        .prediction-match-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .prediction-match-info p {
+            color: #8892b0;
+            font-size: 14px;
+        }
+
+        .prediction-details {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .prediction-badge {
+            background: rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,215,0,0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .prediction-badge.winner {
+            background: rgba(76,175,80,0.1);
+            border-color: rgba(76,175,80,0.3);
+            color: #4caf50;
+        }
+
+        .prediction-badge.winner.wrong {
+            background: rgba(244,67,54,0.1);
+            border-color: rgba(244,67,54,0.3);
+            color: #f44336;
+        }
+
+        .prediction-badge.innings1 {
+            background: rgba(33,150,243,0.1);
+            border-color: rgba(33,150,243,0.3);
+            color: #2196f3;
+        }
+
+        .prediction-badge.innings2 {
+            background: rgba(156,39,176,0.1);
+            border-color: rgba(156,39,176,0.3);
+            color: #9c27b0;
+        }
+
+        .accuracy-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .accuracy-indicator.correct {
+            background: rgba(76,175,80,0.2);
+            color: #4caf50;
+        }
+
+        .accuracy-indicator.wrong {
+            background: rgba(244,67,54,0.2);
+            color: #f44336;
+        }
+
+        .delete-prediction {
+            background: rgba(244,67,54,0.2);
+            border: none;
+            color: #f44336;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .delete-prediction:hover {
+            background: #f44336;
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #8892b0;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-family: 'Teko', sans-serif;
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        /* Completed Matches Page */
+        .completed-matches-section {
+            display: none;
+        }
+
+        .completed-matches-section.active {
+            display: block;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--ipl-gold);
+            color: var(--ipl-gold);
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: var(--ipl-gold);
+            color: var(--ipl-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .matches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-match-info {
+                flex-direction: column;
+            }
+
+            .winner-options {
+                grid-template-columns: 1fr;
+            }
+
+            .powerplay-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .total-score-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .wickets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .prediction-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .filter-section {
+                justify-content: center;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--ipl-gold);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff8c00;
+        }
+
+        /* Success Message */
+        .success-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+            font-weight: 600;
+        }
+
+        .success-toast.show {
+            transform: translateX(0);
+        }
+
+        .innings-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ipl-gold), transparent);
+            margin: 20px 0;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="cricket-ball"></div>
+        <div class="cricket-ball"></div>
+        <div class="cricket-ball"></div>
+        <div class="cricket-ball"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">IPL</div>
+                <div class="logo-text">
+                    <h1>IPL 2026</h1>
+                    <p>Indian Premier League</p>
+                </div>
+            </div>
+            <nav class="nav-tabs">
+                <button class="nav-tab active"><a href="point.html"> Point Table </a></button>
+                <button class="nav-tab active" onclick="showSection('schedule')">Schedule</button>
+                <button class="nav-tab" onclick="showSection('predictions')">My Predictions</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMatches">74</div>
+                <div class="stat-label">Total Matches</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="predictedMatches">0</div>
+                <div class="stat-label">Predicted</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="upcomingMatches">74</div>
+                <div class="stat-label">Upcoming</div>
+            </div>
+            <div class="stat-card clickable" onclick="showCompletedMatches()" title="Click to view completed matches">
+                <div class="stat-number" id="matchesPlayed">0</div>
+                <div class="stat-label">Matches Played Yet</div>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+        <div id="scheduleSection" class="section-content">
+            <div class="section-header">
+                <h2>Match Schedule</h2>
+                <p>Click on any match to make your predictions • Full Season (Mar 28 - May 31)</p>
+            </div>
+
+            <!-- Team Filter -->
+            <div class="filter-section">
+                <span class="filter-label">🔍 Filter by Team:</span>
+                <button class="filter-btn" onclick="filterByTeam('all')">All Teams</button>
+                <button class="filter-btn" onclick="filterByTeam('RCB')">RCB</button>
+                <button class="filter-btn" onclick="filterByTeam('MI')">MI</button>
+                <button class="filter-btn" onclick="filterByTeam('CSK')">CSK</button>
+                <button class="filter-btn" onclick="filterByTeam('KKR')">KKR</button>
+                <button class="filter-btn" onclick="filterByTeam('RR')">RR</button>
+                <button class="filter-btn" onclick="filterByTeam('PBKS')">PBKS</button>
+                <button class="filter-btn" onclick="filterByTeam('GT')">GT</button>
+                <button class="filter-btn" onclick="filterByTeam('DC')">DC</button>
+                <button class="filter-btn" onclick="filterByTeam('LSG')">LSG</button>
+                <button class="filter-btn" onclick="filterByTeam('SRH')">SRH</button>
+                <button class="filter-btn clear" onclick="clearFilter()">Clear</button>
+            </div>
+
+            <div class="matches-grid" id="matchesGrid">
+                <!-- Matches will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Completed Matches Section -->
+        <div id="completedMatchesSection" class="completed-matches-section">
+            <button class="back-btn" onclick="showSection('schedule')">← Back to Schedule</button>
+            <div class="section-header">
+                <h2>Completed Matches</h2>
+                <p>View all finished matches and their results</p>
+            </div>
+            <div class="matches-grid" id="completedMatchesGrid">
+                <!-- Completed matches will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- My Predictions Section -->
+        <div id="predictionsSection" class="section-content" style="display: none;">
+            <div class="section-header">
+                <h2>My Predictions</h2>
+                <p>View and manage all your saved predictions • Green = Correct, Red = Wrong</p>
+            </div>
+            <div class="predictions-list" id="predictionsList">
+                <!-- Predictions will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Prediction Modal -->
+    <div class="modal-overlay" id="predictionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+                <div class="modal-match-info">
+                    <div class="modal-team">
+                        <div class="modal-team-logo" id="modalTeam1Logo">
+                            <img src="" alt="Team 1" id="modalTeam1Img">
+                        </div>
+                        <div class="modal-team-name" id="modalTeam1">Team 1</div>
+                    </div>
+                    <div class="modal-vs">VS</div>
+                    <div class="modal-team">
+                        <div class="modal-team-logo" id="modalTeam2Logo">
+                            <img src="" alt="Team 2" id="modalTeam2Img">
+                        </div>
+                        <div class="modal-team-name" id="modalTeam2">Team 2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- Winner Prediction -->
+                <div class="prediction-section">
+                    <div class="prediction-title">Match Winner Prediction</div>
+                    <p class="section-subtitle">Predict which team will win the match</p>
+                    <div class="winner-options">
+                        <div class="winner-card" id="winnerTeam1" onclick="selectWinner(1)">
+                            <h4 id="winnerTeam1Name">Team 1</h4>
+                            <p>Click to select as winner</p>
+                        </div>
+                        <div class="winner-card" id="winnerTeam2" onclick="selectWinner(2)">
+                            <h4 id="winnerTeam2Name">Team 2</h4>
+                            <p>Click to select as winner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Both Innings Predictions -->
+                <div class="prediction-section">
+                    <div class="prediction-title">Innings Predictions (Both Teams)</div>
+                    <p class="section-subtitle">Predict Powerplay runs, wickets, and total score for both innings</p>
+
+                    <div class="both-innings-container">
+                        <!-- 1st Innings -->
+                        <div class="innings-box" id="innings1Box">
+                            <div class="innings-header">1st Innings (Batting First)</div>
+
+                            <!-- Powerplay Runs -->
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; color: #2196f3; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; font-size: 15px;">
+                                    Powerplay Runs 
+                                </label>
+                                <div class="powerplay-grid" id="powerplayGrid1">
+                                    <!-- Generated by JS -->
+                                </div>
+                            </div>
+
+                           
+
+                            <!-- Total Score -->
+                            <div>
+                                <label style="display: block; color: #2196f3; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; font-size: 15px;">
+                                    Total Score 
+                                </label>
+                                <div class="total-score-grid" id="totalScoreGrid1">
+                                    <!-- Generated by JS -->
+                                </div>
+                            </div>
+                             <!-- Powerplay Wickets -->
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; color: #f8f80b; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; font-size: 15px;">
+                                     Total Wickets 
+                                </label>
+                                <div class="wickets-grid" id="wicketsGrid1">
+                                    <!-- Generated by JS -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- 2nd Innings -->
+                        <div class="innings-box" id="innings2Box">
+                            <div class="innings-header">2nd Innings (Chasing)</div>
+
+                            <!-- Powerplay Runs -->
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; color: #2196f3; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; font-size: 15px;">
+                                    Powerplay Runs 
+                                </label>
+                                <div class="powerplay-grid" id="powerplayGrid2">
+                                    <!-- Generated by JS -->
+                                </div>
+                            </div>
+
+                
+
+                            <!-- Total Score -->
+                            <div>
+                                <label style="display: block; color: #2196f3; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; font-size: 15px;">
+                                    Total Score 
+                                </label>
+                                <div class="total-score-grid" id="totalScoreGrid2">
+                                    <!-- Generated by JS -->
+                                </div>
+                            </div>
+
+                               <!-- Powerplay Wickets -->
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: block; color:  #f8f80b; font-weight: 600; margin-bottom: 8px; text-transform: uppercase; font-size: 15px;">
+                                    Total Wickets
+                                </label>
+                                <div class="wickets-grid" id="wicketsGrid2">
+                                    <!-- Generated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="save-prediction-btn" onclick="savePrediction()">
+                    Save My Prediction
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="success-toast" id="successToast">Prediction Saved Successfully!</div>
+
+    <script>
+
+        // ============================================
+        // MATCH RESULTS - UPDATE THIS SECTION MANUALLY
+        // ============================================
+        // Add completed match results here in this format:
+        // matchId: { winner: "Team Name", result: "Won By X Runs/Wickets", margin: "X" }
+        // Example: 1: { winner: "RCB", result: "Won By 6 Wickets", margin: "6 wickets" }
+
+        const matchResults = {
+            // Add your match results here as matches complete
+            // Format: matchId: { winner: "TEAM_CODE", result: "Full Result Text" }
+
+            // Example entries (remove these and add real ones):
+            // 1: { winner: "RCB", result: "RCB Won By 6 Wickets" },
+            // 2: { winner: "MI", result: "MI Won By 15 Runs" },
+            // 3: { winner: "CSK", result: "CSK Won By 8 Wickets" },
+        };
+
+        // ============================================
+        // END OF MATCH RESULTS SECTION
+        // ============================================
+
+        // Team Logos Mapping
+        const teamLogos = {
+            'RCB': 'https://www.royalchallengers.com/PRRCB01/public/styles/large/public/2024-03/RCB%20LOGO%20IMAGE%20%281%29.png?itok=AhIkkVKN',
+            'MI': 'https://i.pinimg.com/1200x/37/cd/d5/37cdd544a025e42fec5202a3d5b095c8.jpg',
+            'CSK': 'https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg',
+            'KKR': 'https://www.mbaskool.com/2015_images/stories/apr-images/ipl-logos01.jpg',
+            'RR': 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png',
+            'PBKS': 'https://mir-s3-cdn-cf.behance.net/projects/404/614abb172278773.Y3JvcCwxNTAwLDExNzMsMCwxNA.png',
+            'GT': 'https://img.jagranjosh.com/images/2023/March/3132023/gujarat-titans-players-list.webp',
+            'DC': 'https://assets.designhill.com/design-blog/wp-content/uploads/2025/03/2-4.jpg',
+            'LSG': 'https://media.crictracker.com/media/attachments/1772093037092_LSG-Logo.jpeg',
+            'SRH': 'https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg'
+        };
+
+        // Team codes to full names mapping
+        const teamNames = {
+            'RCB': 'Royal Challengers Bengaluru',
+            'MI': 'Mumbai Indians',
+            'CSK': 'Chennai Super Kings',
+            'KKR': 'Kolkata Knight Riders',
+            'RR': 'Rajasthan Royals',
+            'PBKS': 'Punjab Kings',
+            'GT': 'Gujarat Titans',
+            'DC': 'Delhi Capitals',
+            'LSG': 'Lucknow Super Giants',
+            'SRH': 'Sunrisers Hyderabad'
+        };
+
+        // IPL 2026 Complete Schedule (All 74 Matches)
+        const matches = [
+            // Phase 1 (Mar 28 - Apr 12)
+            { id: 1, date: "Mar 28, Sat", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Sunrisers Hyderabad", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "SRH" },
+            { id: 2, date: "Mar 29, Sun", time: "7:30 PM", team1: "Mumbai Indians", team2: "Kolkata Knight Riders", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "KKR" },
+            { id: 3, date: "Mar 30, Mon", time: "7:30 PM", team1: "Rajasthan Royals", team2: "Chennai Super Kings", venue: "Barsapara Cricket Stadium, Guwahati", t1: "RR", t2: "CSK" },
+            { id: 4, date: "Mar 31, Tue", time: "7:30 PM", team1: "Punjab Kings", team2: "Gujarat Titans", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "GT" },
+            { id: 5, date: "Apr 1, Wed", time: "7:30 PM", team1: "Lucknow Super Giants", team2: "Delhi Capitals", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "DC" },
+            { id: 6, date: "Apr 2, Thu", time: "7:30 PM", team1: "Kolkata Knight Riders", team2: "Sunrisers Hyderabad", venue: "Eden Gardens, Kolkata", t1: "KKR", t2: "SRH" },
+            { id: 7, date: "Apr 3, Fri", time: "7:30 PM", team1: "Chennai Super Kings", team2: "Punjab Kings", venue: "M. A. Chidambaram Stadium, Chennai", t1: "CSK", t2: "PBKS" },
+            { id: 8, date: "Apr 4, Sat", time: "3:30 PM", team1: "Delhi Capitals", team2: "Mumbai Indians", venue: "Arun Jaitley Stadium, Delhi", t1: "DC", t2: "MI" },
+            { id: 9, date: "Apr 4, Sat", time: "7:30 PM", team1: "Gujarat Titans", team2: "Rajasthan Royals", venue: "Narendra Modi Stadium, Ahmedabad", t1: "GT", t2: "RR" },
+            { id: 10, date: "Apr 5, Sun", time: "3:30 PM", team1: "Sunrisers Hyderabad", team2: "Lucknow Super Giants", venue: "Rajiv Gandhi International Cricket Stadium, Hyderabad", t1: "SRH", t2: "LSG" },
+            { id: 11, date: "Apr 5, Sun", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Chennai Super Kings", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "CSK" },
+            { id: 12, date: "Apr 6, Mon", time: "7:30 PM", team1: "Kolkata Knight Riders", team2: "Punjab Kings", venue: "Eden Gardens, Kolkata", t1: "KKR", t2: "PBKS" },
+            { id: 13, date: "Apr 7, Tue", time: "7:30 PM", team1: "Rajasthan Royals", team2: "Mumbai Indians", venue: "Barsapara Cricket Stadium, Guwahati", t1: "RR", t2: "MI" },
+            { id: 14, date: "Apr 8, Wed", time: "7:30 PM", team1: "Delhi Capitals", team2: "Gujarat Titans", venue: "Arun Jaitley Stadium, Delhi", t1: "DC", t2: "GT" },
+            { id: 15, date: "Apr 9, Thu", time: "7:30 PM", team1: "Kolkata Knight Riders", team2: "Lucknow Super Giants", venue: "Eden Gardens, Kolkata", t1: "KKR", t2: "LSG" },
+            { id: 16, date: "Apr 10, Fri", time: "7:30 PM", team1: "Rajasthan Royals", team2: "Royal Challengers Bengaluru", venue: "Barsapara Cricket Stadium, Guwahati", t1: "RR", t2: "RCB" },
+            { id: 17, date: "Apr 11, Sat", time: "3:30 PM", team1: "Punjab Kings", team2: "Sunrisers Hyderabad", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "SRH" },
+            { id: 18, date: "Apr 11, Sat", time: "7:30 PM", team1: "Chennai Super Kings", team2: "Delhi Capitals", venue: "M. A. Chidambaram Stadium, Chennai", t1: "CSK", t2: "DC" },
+            { id: 19, date: "Apr 12, Sun", time: "3:30 PM", team1: "Lucknow Super Giants", team2: "Gujarat Titans", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "GT" },
+            { id: 20, date: "Apr 12, Sun", time: "7:30 PM", team1: "Mumbai Indians", team2: "Royal Challengers Bengaluru", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "RCB" },
+
+            // Phase 2 (Apr 13 - May 24)
+            { id: 21, date: "Apr 13, Mon", time: "7:30 PM", team1: "Sunrisers Hyderabad", team2: "Rajasthan Royals", venue: "Rajiv Gandhi International Cricket Stadium, Hyderabad", t1: "SRH", t2: "RR" },
+            { id: 22, date: "Apr 14, Tue", time: "7:30 PM", team1: "Chennai Super Kings", team2: "Kolkata Knight Riders", venue: "M. A. Chidambaram Stadium, Chennai", t1: "CSK", t2: "KKR" },
+            { id: 23, date: "Apr 15, Wed", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Lucknow Super Giants", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "LSG" },
+            { id: 24, date: "Apr 16, Thu", time: "7:30 PM", team1: "Mumbai Indians", team2: "Punjab Kings", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "PBKS" },
+            { id: 25, date: "Apr 17, Fri", time: "7:30 PM", team1: "Gujarat Titans", team2: "Kolkata Knight Riders", venue: "Narendra Modi Stadium, Ahmedabad", t1: "GT", t2: "KKR" },
+            { id: 26, date: "Apr 18, Sat", time: "3:30 PM", team1: "Royal Challengers Bengaluru", team2: "Delhi Capitals", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "DC" },
+            { id: 27, date: "Apr 18, Sat", time: "7:30 PM", team1: "Sunrisers Hyderabad", team2: "Chennai Super Kings", venue: "Rajiv Gandhi International Cricket Stadium, Hyderabad", t1: "SRH", t2: "CSK" },
+            { id: 28, date: "Apr 19, Sun", time: "3:30 PM", team1: "Kolkata Knight Riders", team2: "Rajasthan Royals", venue: "Eden Gardens, Kolkata", t1: "KKR", t2: "RR" },
+            { id: 29, date: "Apr 19, Sun", time: "7:30 PM", team1: "Punjab Kings", team2: "Lucknow Super Giants", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "LSG" },
+            { id: 30, date: "Apr 20, Mon", time: "7:30 PM", team1: "Gujarat Titans", team2: "Mumbai Indians", venue: "Narendra Modi Stadium, Ahmedabad", t1: "GT", t2: "MI" },
+            { id: 31, date: "Apr 21, Tue", time: "7:30 PM", team1: "Sunrisers Hyderabad", team2: "Delhi Capitals", venue: "Rajiv Gandhi International Cricket Stadium, Hyderabad", t1: "SRH", t2: "DC" },
+            { id: 32, date: "Apr 22, Wed", time: "7:30 PM", team1: "Lucknow Super Giants", team2: "Rajasthan Royals", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "RR" },
+            { id: 33, date: "Apr 23, Thu", time: "7:30 PM", team1: "Mumbai Indians", team2: "Chennai Super Kings", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "CSK" },
+            { id: 34, date: "Apr 24, Fri", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Gujarat Titans", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "GT" },
+            { id: 35, date: "Apr 25, Sat", time: "3:30 PM", team1: "Delhi Capitals", team2: "Punjab Kings", venue: "Arun Jaitley Stadium, Delhi", t1: "DC", t2: "PBKS" },
+            { id: 36, date: "Apr 25, Sat", time: "7:30 PM", team1: "Rajasthan Royals", team2: "Sunrisers Hyderabad", venue: "Sawai Mansingh Stadium, Jaipur", t1: "RR", t2: "SRH" },
+            { id: 37, date: "Apr 26, Sun", time: "3:30 PM", team1: "Gujarat Titans", team2: "Chennai Super Kings", venue: "Narendra Modi Stadium, Ahmedabad", t1: "GT", t2: "CSK" },
+            { id: 38, date: "Apr 26, Sun", time: "7:30 PM", team1: "Lucknow Super Giants", team2: "Kolkata Knight Riders", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "KKR" },
+            { id: 39, date: "Apr 27, Mon", time: "7:30 PM", team1: "Delhi Capitals", team2: "Royal Challengers Bengaluru", venue: "Arun Jaitley Stadium, Delhi", t1: "DC", t2: "RCB" },
+            { id: 40, date: "Apr 28, Tue", time: "7:30 PM", team1: "Punjab Kings", team2: "Rajasthan Royals", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "RR" },
+            { id: 41, date: "Apr 29, Wed", time: "7:30 PM", team1: "Mumbai Indians", team2: "Sunrisers Hyderabad", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "SRH" },
+            { id: 42, date: "Apr 30, Thu", time: "7:30 PM", team1: "Gujarat Titans", team2: "Royal Challengers Bengaluru", venue: "Narendra Modi Stadium, Ahmedabad", t1: "GT", t2: "RCB" },
+            { id: 43, date: "May 1, Fri", time: "7:30 PM", team1: "Rajasthan Royals", team2: "Delhi Capitals", venue: "Sawai Mansingh Stadium, Jaipur", t1: "RR", t2: "DC" },
+            { id: 44, date: "May 2, Sat", time: "7:30 PM", team1: "Mumbai Indians", team2: "Chennai Super Kings", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "CSK" },
+            { id: 45, date: "May 3, Sun", time: "3:30 PM", team1: "Sunrisers Hyderabad", team2: "Kolkata Knight Riders", venue: "Rajiv Gandhi International Cricket Stadium, Hyderabad", t1: "SRH", t2: "KKR" },
+            { id: 46, date: "May 3, Sun", time: "7:30 PM", team1: "Punjab Kings", team2: "Gujarat Titans", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "GT" },
+            { id: 47, date: "May 4, Mon", time: "7:30 PM", team1: "Lucknow Super Giants", team2: "Mumbai Indians", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "MI" },
+            { id: 48, date: "May 5, Tue", time: "7:30 PM", team1: "Delhi Capitals", team2: "Chennai Super Kings", venue: "Arun Jaitley Stadium, Delhi", t1: "DC", t2: "CSK" },
+            { id: 49, date: "May 6, Wed", time: "7:30 PM", team1: "Punjab Kings", team2: "Sunrisers Hyderabad", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "SRH" },
+            { id: 50, date: "May 7, Thu", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Lucknow Super Giants", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "LSG" },
+            { id: 51, date: "May 8, Fri", time: "7:30 PM", team1: "Delhi Capitals", team2: "Kolkata Knight Riders", venue: "Arun Jaitley Stadium, Delhi", t1: "DC", t2: "KKR" },
+            { id: 52, date: "May 9, Sat", time: "7:30 PM", team1: "Rajasthan Royals", team2: "Gujarat Titans", venue: "Sawai Mansingh Stadium, Jaipur", t1: "RR", t2: "GT" },
+            { id: 53, date: "May 10, Sun", time: "3:30 PM", team1: "Chennai Super Kings", team2: "Lucknow Super Giants", venue: "M. A. Chidambaram Stadium, Chennai", t1: "CSK", t2: "LSG" },
+            { id: 54, date: "May 10, Sun", time: "7:30 PM", team1: "Mumbai Indians", team2: "Royal Challengers Bengaluru", venue: "Shaheed Veer Narayan Singh International Stadium, Raipur", t1: "MI", t2: "RCB" },
+            { id: 55, date: "May 11, Mon", time: "7:30 PM", team1: "Punjab Kings", team2: "Delhi Capitals", venue: "HPCA Stadium, Dharamshala", t1: "PBKS", t2: "DC" },
+            { id: 56, date: "May 12, Tue", time: "7:30 PM", team1: "Gujarat Titans", team2: "Sunrisers Hyderabad", venue: "Narendra Modi Stadium, Ahmedabad", t1: "GT", t2: "SRH" },
+            { id: 57, date: "May 13, Wed", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Kolkata Knight Riders", venue: "Shaheed Veer Narayan Singh International Stadium, Raipur", t1: "RCB", t2: "KKR" },
+            { id: 58, date: "May 14, Thu", time: "7:30 PM", team1: "Mumbai Indians", team2: "Punjab Kings", venue: "HPCA Stadium, Dharamshala", t1: "MI", t2: "PBKS" },
+            { id: 59, date: "May 15, Fri", time: "7:30 PM", team1: "Lucknow Super Giants", team2: "Chennai Super Kings", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "CSK" },
+            { id: 60, date: "May 16, Sat", time: "7:30 PM", team1: "Kolkata Knight Riders", team2: "Gujarat Titans", venue: "Eden Gardens, Kolkata", t1: "KKR", t2: "GT" },
+            { id: 61, date: "May 17, Sun", time: "3:30 PM", team1: "Punjab Kings", team2: "Royal Challengers Bengaluru", venue: "HPCA Stadium, Dharamshala", t1: "PBKS", t2: "RCB" },
+            { id: 62, date: "May 17, Sun", time: "7:30 PM", team1: "Delhi Capitals", team2: "Rajasthan Royals", venue: "Arun Jaitley Stadium, Delhi", t1: "DC", t2: "RR" },
+            { id: 63, date: "May 18, Mon", time: "7:30 PM", team1: "Chennai Super Kings", team2: "Sunrisers Hyderabad", venue: "M. A. Chidambaram Stadium, Chennai", t1: "CSK", t2: "SRH" },
+            { id: 64, date: "May 19, Tue", time: "7:30 PM", team1: "Lucknow Super Giants", team2: "Rajasthan Royals", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "RR" },
+            { id: 65, date: "May 20, Wed", time: "7:30 PM", team1: "Mumbai Indians", team2: "Kolkata Knight Riders", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "KKR" },
+            { id: 66, date: "May 21, Thu", time: "7:30 PM", team1: "Chennai Super Kings", team2: "Gujarat Titans", venue: "M. A. Chidambaram Stadium, Chennai", t1: "CSK", t2: "GT" },
+            { id: 67, date: "May 22, Fri", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Sunrisers Hyderabad", venue: "Rajiv Gandhi International Cricket Stadium, Hyderabad", t1: "RCB", t2: "SRH" },
+            { id: 68, date: "May 23, Sat", time: "7:30 PM", team1: "Lucknow Super Giants", team2: "Punjab Kings", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "PBKS" },
+            { id: 69, date: "May 24, Sun", time: "3:30 PM", team1: "Rajasthan Royals", team2: "Mumbai Indians", venue: "Wankhede Stadium, Mumbai", t1: "RR", t2: "MI" },
+            { id: 70, date: "May 24, Sun", time: "7:30 PM", team1: "Delhi Capitals", team2: "Kolkata Knight Riders", venue: "Eden Gardens, Kolkata", t1: "DC", t2: "KKR" },
+
+            // Playoffs (May 26-31)
+            { id: 71, date: "May 26, Tue", time: "7:30 PM", team1: "Qualifier 1 (TBD)", team2: "Qualifier 1 (TBD)", venue: "Narendra Modi Stadium, Ahmedabad", t1: "TBD", t2: "TBD" },
+            { id: 72, date: "May 27, Wed", time: "7:30 PM", team1: "Eliminator (TBD)", team2: "Eliminator (TBD)", venue: "Narendra Modi Stadium, Ahmedabad", t1: "TBD", t2: "TBD" },
+            { id: 73, date: "May 29, Fri", time: "7:30 PM", team1: "Qualifier 2 (TBD)", team2: "Qualifier 2 (TBD)", venue: "Narendra Modi Stadium, Ahmedabad", t1: "TBD", t2: "TBD" },
+            { id: 74, date: "May 31, Sun", time: "7:30 PM", team1: "Final (TBD)", team2: "Final (TBD)", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "TBD", t2: "TBD" }
+        ];
+
+        // State
+        let currentMatch = null;
+        let selectedWinner = null;
+        let predictions = JSON.parse(localStorage.getItem('ipl2026_predictions')) || {};
+        let currentFilter = 'all';
+
+        // Prediction data structure for both innings
+        let predictionData = {
+            innings1: { powerplayRuns: null, powerplayWickets: null, totalScore: null },
+            innings2: { powerplayRuns: null, powerplayWickets: null, totalScore: null }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMatches();
+            updateStats();
+            generateAllOptions();
+            checkAndMoveCompletedMatches();
+        });
+
+        // Check and move completed matches based on match time
+        function checkAndMoveCompletedMatches() {
+            const now = new Date();
+            const currentTime = now.getTime();
+
+            // Current date is March 27, 2026 (from system time)
+            // IPL starts March 28, 2026
+            // For testing purposes, you can adjust this logic
+
+            // In real scenario, matches would be moved to completed when:
+            // 1. Match result is added to matchResults object, OR
+            // 2. Match time has passed (assuming match is completed)
+
+            // For now, we rely on matchResults object to determine completed matches
+            updateStats();
+        }
+
+        // Get completed matches
+        function getCompletedMatches() {
+            return matches.filter(match => matchResults[match.id]);
+        }
+
+        // Get upcoming matches (not completed)
+        function getUpcomingMatches() {
+            return matches.filter(match => !matchResults[match.id]);
+        }
+
+        // Generate all grid options
+        function generateAllOptions() {
+            generatePowerplayOptions('powerplayGrid1', 1);
+            generatePowerplayOptions('powerplayGrid2', 2);
+            generateWicketsOptions('wicketsGrid1', 1);
+            generateWicketsOptions('wicketsGrid2', 2);
+            generateTotalScoreOptions('totalScoreGrid1', 1);
+            generateTotalScoreOptions('totalScoreGrid2', 2);
+        }
+
+        // Generate Powerplay Options (10-run windows: 10-20, 20-30, ... 80-90, 90+)
+        function generatePowerplayOptions(gridId, innings) {
+            const grid = document.getElementById(gridId);
+            let html = '';
+            // Start from 10-20, go up to 80-90, then 90+
+            for (let i = 10; i < 90; i += 10) {
+                const range = `${i}-${i+10}`;
+                html += `<div class="score-option" onclick="selectPowerplayRuns(${innings}, '${range}')" data-innings="${innings}" data-range="${range}">${range}</div>`;
+            }
+            // Last option: 90 and above
+            html += `<div class="score-option" onclick="selectPowerplayRuns(${innings}, '90+')" data-innings="${innings}" data-range="90+">90+</div>`;
+            grid.innerHTML = html;
+        }
+
+        // Generate Wickets Options (3-wicket windows: 0-2, 3-5, 6-8, 8+)
+        function generateWicketsOptions(gridId, innings) {
+            const grid = document.getElementById(gridId);
+            const ranges = ['0-2', '3-5', '6-8', '8+'];
+            let html = '';
+            ranges.forEach(range => {
+                html += `<div class="wicket-option" onclick="selectPowerplayWickets(${innings}, '${range}')" data-innings="${innings}" data-wickets="${range}">${range}</div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        // Generate Total Score Options (25-run windows: 50-75, 75-100, ... 251-275, 276+)
+        function generateTotalScoreOptions(gridId, innings) {
+            const grid = document.getElementById(gridId);
+            let html = '';
+            // Start from 50-75, go up to 251-275
+            for (let i = 50; i < 275; i += 25) {
+                const range = `${i}-${i+25}`;
+                html += `<div class="total-score-option" onclick="selectTotalScore(${innings}, '${range}')" data-innings="${innings}" data-score="${range}">${range}</div>`;
+            }
+            // Last option: 276 and above
+            html += `<div class="total-score-option" onclick="selectTotalScore(${innings}, '276+')" data-innings="${innings}" data-score="276+">276+</div>`;
+            grid.innerHTML = html;
+        }
+
+        // Filter matches by team
+        function filterByTeam(team) {
+            currentFilter = team;
+
+            // Update active state of filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            renderMatches();
+        }
+
+        function clearFilter() {
+            currentFilter = 'all';
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            renderMatches();
+        }
+
+        // Render Matches
+        function renderMatches() {
+            const grid = document.getElementById('matchesGrid');
+            let matchesToShow = getUpcomingMatches();
+
+            // Apply team filter
+            if (currentFilter !== 'all') {
+                matchesToShow = matchesToShow.filter(match => 
+                    match.t1 === currentFilter || match.t2 === currentFilter
+                );
+            }
+
+            if (matchesToShow.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="empty-state-icon">🏏</div>
+                        <h3>No Matches Found</h3>
+                        <p>No upcoming matches found for the selected filter.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = matchesToShow.map(match => {
+                const hasPrediction = predictions[match.id];
+                const isPlayoff = match.id > 70;
+                return `
+                    <div class="match-card ${hasPrediction ? 'predicted' : ''} ${isPlayoff ? 'playoff' : ''}" onclick="openPredictionModal(${match.id})">
+                        <div class="match-header">
+                            <span class="match-number">${isPlayoff ? match.team1 : 'Match ' + match.id}</span>
+                            <span class="match-date">${match.date} • ${match.time}</span>
+                        </div>
+                        <div class="match-teams">
+                            <div class="team">
+                                <div class="team-logo">
+                                    <img src="${match.t1 !== 'TBD' ? teamLogos[match.t1] : ''}" alt="${match.t1}" onerror="this.style.display='none'">
+                                </div>
+                                <div class="team-name">${match.t1}</div>
+                                <div class="team-short">${match.team1}</div>
+                            </div>
+                            <div class="vs-divider">VS</div>
+                            <div class="team">
+                                <div class="team-logo">
+                                    <img src="${match.t2 !== 'TBD' ? teamLogos[match.t2] : ''}" alt="${match.t2}" onerror="this.style.display='none'">
+                                </div>
+                                <div class="team-name">${match.t2}</div>
+                                <div class="team-short">${match.team2}</div>
+                            </div>
+                        </div>
+                        <div class="match-footer">
+                            <span class="venue">📍 ${match.venue.split(',')[0]}</span>
+                            <span class="prediction-status ${hasPrediction ? 'completed' : 'pending'}">
+                                ${hasPrediction ? 'Predicted' : (isPlayoff ? 'TBD' : 'Predict Now')}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render Completed Matches
+        function renderCompletedMatches() {
+            const grid = document.getElementById('completedMatchesGrid');
+            const completedMatches = getCompletedMatches();
+
+            if (completedMatches.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="empty-state-icon">🏏</div>
+                        <h3>No Completed Matches Yet</h3>
+                        <p>Matches will appear here once they are completed and results are updated.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = completedMatches.map(match => {
+                const result = matchResults[match.id];
+                const hasPrediction = predictions[match.id];
+                let accuracyClass = '';
+                let accuracyBadge = '';
+
+                if (hasPrediction) {
+                    const prediction = predictions[match.id];
+                    const predictedTeam = prediction.winner;
+                    const predictedTeamCode = Object.keys(teamNames).find(key => teamNames[key] === predictedTeam) || predictedTeam;
+
+                    if (result.winner === predictedTeamCode) {
+                        accuracyClass = 'correct-prediction';
+                        accuracyBadge = '<span class="prediction-accuracy correct">✓ Correct</span>';
+                    } else {
+                        accuracyClass = 'wrong-prediction';
+                        accuracyBadge = '<span class="prediction-accuracy wrong">✗ Wrong</span>';
+                    }
+                }
+
+                return `
+                    <div class="match-card completed ${accuracyClass}">
+                        <div class="match-header">
+                            <span class="match-number">Match ${match.id}</span>
+                            <span class="match-date">${match.date} • ${match.time}</span>
+                        </div>
+                        <div class="match-teams">
+                            <div class="team">
+                                <div class="team-logo">
+                                    <img src="${match.t1 !== 'TBD' ? teamLogos[match.t1] : ''}" alt="${match.t1}" onerror="this.style.display='none'">
+                                </div>
+                                <div class="team-name">${match.t1}</div>
+                                <div class="team-short">${match.team1}</div>
+                            </div>
+                            <div class="vs-divider">VS</div>
+                            <div class="team">
+                                <div class="team-logo">
+                                    <img src="${match.t2 !== 'TBD' ? teamLogos[match.t2] : ''}" alt="${match.t2}" onerror="this.style.display='none'">
+                                </div>
+                                <div class="team-name">${match.t2}</div>
+                                <div class="team-short">${match.team2}</div>
+                            </div>
+                        </div>
+                        <div class="match-result">
+                            🏆 ${result.result}
+                        </div>
+                        <div class="match-footer">
+                            <span class="venue">📍 ${match.venue.split(',')[0]}</span>
+                            ${accuracyBadge}
+                            <span class="prediction-status ${hasPrediction ? 'completed' : 'pending'}">
+                                ${hasPrediction ? 'Predicted' : 'No Prediction'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Show Completed Matches Page
+        function showCompletedMatches() {
+            document.getElementById('scheduleSection').style.display = 'none';
+            document.getElementById('predictionsSection').style.display = 'none';
+            document.getElementById('completedMatchesSection').style.display = 'block';
+            document.getElementById('completedMatchesSection').classList.add('active');
+
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+
+            renderCompletedMatches();
+        }
+
+        // Modal Functions
+        function openPredictionModal(matchId) {
+            currentMatch = matches.find(m => m.id === matchId);
+            if (!currentMatch) return;
+
+            // Reset prediction data
+            predictionData = {
+                innings1: { powerplayRuns: null, powerplayWickets: null, totalScore: null },
+                innings2: { powerplayRuns: null, powerplayWickets: null, totalScore: null }
+            };
+            selectedWinner = null;
+
+            // Set modal content
+            document.getElementById('modalTeam1').textContent = currentMatch.team1;
+            document.getElementById('modalTeam2').textContent = currentMatch.team2;
+            document.getElementById('winnerTeam1Name').textContent = currentMatch.team1;
+            document.getElementById('winnerTeam2Name').textContent = currentMatch.team2;
+
+            // Handle TBD for playoffs
+            if (currentMatch.t1 !== 'TBD') {
+                document.getElementById('modalTeam1Img').src = teamLogos[currentMatch.t1];
+                document.getElementById('modalTeam2Img').src = teamLogos[currentMatch.t2];
+            } else {
+                document.getElementById('modalTeam1Img').src = '';
+                document.getElementById('modalTeam2Img').src = '';
+            }
+
+            // Reset all selections
+            document.querySelectorAll('.winner-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.score-option').forEach(s => s.classList.remove('selected'));
+            document.querySelectorAll('.wicket-option').forEach(w => w.classList.remove('selected'));
+            document.querySelectorAll('.total-score-option').forEach(t => t.classList.remove('selected'));
+
+            // Load existing prediction if any
+            const existing = predictions[matchId];
+            if (existing) {
+                selectedWinner = existing.winner;
+                if (selectedWinner === currentMatch.team1) {
+                    document.getElementById('winnerTeam1').classList.add('selected');
+                    document.getElementById('winnerTeam2').classList.remove('selected');
+                } else {
+                    document.getElementById('winnerTeam2').classList.add('selected');
+                    document.getElementById('winnerTeam1').classList.remove('selected');
+                }
+
+                // Load innings data
+                if (existing.innings1) {
+                    predictionData.innings1 = existing.innings1;
+                    if (existing.innings1.powerplayRuns) selectPowerplayRuns(1, existing.innings1.powerplayRuns, false);
+                    if (existing.innings1.powerplayWickets) selectPowerplayWickets(1, existing.innings1.powerplayWickets, false);
+                    if (existing.innings1.totalScore) selectTotalScore(1, existing.innings1.totalScore, false);
+                }
+                if (existing.innings2) {
+                    predictionData.innings2 = existing.innings2;
+                    if (existing.innings2.powerplayRuns) selectPowerplayRuns(2, existing.innings2.powerplayRuns, false);
+                    if (existing.innings2.powerplayWickets) selectPowerplayWickets(2, existing.innings2.powerplayWickets, false);
+                    if (existing.innings2.totalScore) selectTotalScore(2, existing.innings2.totalScore, false);
+                }
+            }
+
+            document.getElementById('predictionModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('predictionModal').classList.remove('active');
+            currentMatch = null;
+        }
+
+        // Selection Functions
+        function selectWinner(team) {
+            selectedWinner = team === 1 ? currentMatch.team1 : currentMatch.team2;
+            document.getElementById('winnerTeam1').classList.toggle('selected', team === 1);
+            document.getElementById('winnerTeam2').classList.toggle('selected', team === 2);
+        }
+
+        function selectPowerplayRuns(innings, range, updateData = true) {
+            if (updateData) predictionData[`innings${innings}`].powerplayRuns = range;
+
+            // Update UI
+            document.querySelectorAll(`.score-option[data-innings="${innings}"]`).forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.range === range);
+            });
+        }
+
+        function selectPowerplayWickets(innings, range, updateData = true) {
+            if (updateData) predictionData[`innings${innings}`].powerplayWickets = range;
+
+            // Update UI
+            document.querySelectorAll(`.wicket-option[data-innings="${innings}"]`).forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.wickets === range);
+            });
+        }
+
+        function selectTotalScore(innings, range, updateData = true) {
+            if (updateData) predictionData[`innings${innings}`].totalScore = range;
+
+            // Update UI
+            document.querySelectorAll(`.total-score-option[data-innings="${innings}"]`).forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.score === range);
+            });
+        }
+
+        // Save Prediction
+        function savePrediction() {
+            if (!currentMatch) return;
+
+            if (!selectedWinner) {
+                alert('Please select a match winner!');
+                return;
+            }
+
+            const prediction = {
+                matchId: currentMatch.id,
+                match: `${currentMatch.t1} vs ${currentMatch.t2}`,
+                date: currentMatch.date,
+                venue: currentMatch.venue,
+                winner: selectedWinner,
+                innings1: predictionData.innings1,
+                innings2: predictionData.innings2,
+                timestamp: new Date().toISOString()
+            };
+
+            predictions[currentMatch.id] = prediction;
+            localStorage.setItem('ipl2026_predictions', JSON.stringify(predictions));
+
+            // Show success
+            showToast('Prediction Saved Successfully!');
+
+            // Update UI
+            renderMatches();
+            updateStats();
+            closeModal();
+        }
+
+        // Delete Prediction
+        function deletePrediction(matchId) {
+            if (confirm('Are you sure you want to delete this prediction?')) {
+                delete predictions[matchId];
+                localStorage.setItem('ipl2026_predictions', JSON.stringify(predictions));
+                renderPredictions();
+                renderMatches();
+                updateStats();
+                showToast('Prediction Deleted');
+            }
+        }
+
+        // View Management
+        function showSection(section) {
+            // Hide all sections first
+            document.getElementById('scheduleSection').style.display = 'none';
+            document.getElementById('predictionsSection').style.display = 'none';
+            document.getElementById('completedMatchesSection').style.display = 'none';
+            document.getElementById('completedMatchesSection').classList.remove('active');
+
+            // Update tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+
+            // Show selected section
+            if (section === 'schedule') {
+                document.getElementById('scheduleSection').style.display = 'block';
+                event.target.classList.add('active');
+                renderMatches();
+            } else if (section === 'predictions') {
+                document.getElementById('predictionsSection').style.display = 'block';
+                event.target.classList.add('active');
+                renderPredictions();
+            }
+        }
+
+        function renderPredictions() {
+            const list = document.getElementById('predictionsList');
+            const preds = Object.values(predictions);
+
+            if (preds.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🏏</div>
+                        <h3>No Predictions Yet</h3>
+                        <p>Click on any match in the schedule to make your first prediction!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort by match ID
+            preds.sort((a, b) => a.matchId - b.matchId);
+
+            list.innerHTML = preds.map(pred => {
+                const innings1Badges = [];
+                const innings2Badges = [];
+
+                if (pred.innings1) {
+                    if (pred.innings1.powerplayRuns) innings1Badges.push(`<span>⚡ PP Runs: ${pred.innings1.powerplayRuns}</span>`);
+                    if (pred.innings1.powerplayWickets) innings1Badges.push(`<span>🎯 PP Wkts: ${pred.innings1.powerplayWickets}</span>`);
+                    if (pred.innings1.totalScore) innings1Badges.push(`<span>📊 Score: ${pred.innings1.totalScore}</span>`);
+                }
+
+                if (pred.innings2) {
+                    if (pred.innings2.powerplayRuns) innings2Badges.push(`<span>⚡ PP Runs: ${pred.innings2.powerplayRuns}</span>`);
+                    if (pred.innings2.powerplayWickets) innings2Badges.push(`<span>🎯 PP Wkts: ${pred.innings2.powerplayWickets}</span>`);
+                    if (pred.innings2.totalScore) innings2Badges.push(`<span>📊 Score: ${pred.innings2.totalScore}</span>`);
+                }
+
+                // Check if match has result
+                const matchResult = matchResults[pred.matchId];
+                let accuracyIndicator = '';
+                let itemClass = '';
+                let winnerBadgeClass = 'winner';
+
+                if (matchResult) {
+                    const predictedTeam = pred.winner;
+                    const predictedTeamCode = Object.keys(teamNames).find(key => teamNames[key] === predictedTeam) || predictedTeam;
+
+                    if (matchResult.winner === predictedTeamCode) {
+                        accuracyIndicator = `<div class="accuracy-indicator correct">✓ CORRECT PREDICTION</div>`;
+                        itemClass = 'correct';
+                    } else {
+                        accuracyIndicator = `<div class="accuracy-indicator wrong">✗ WRONG PREDICTION</div>`;
+                        itemClass = 'wrong';
+                        winnerBadgeClass = 'winner wrong';
+                    }
+                } else {
+                    accuracyIndicator = `<div class="accuracy-indicator" style="background: rgba(255,215,0,0.1); color: var(--ipl-gold);">⏳ PENDING</div>`;
+                }
+
+                return `
+                    <div class="prediction-item ${itemClass}">
+                        <div class="prediction-match-info">
+                            <h4>Match ${pred.matchId}: ${pred.match}</h4>
+                            <p>${pred.date} • ${pred.venue}</p>
+                        </div>
+                        <div class="prediction-details">
+                            <div class="prediction-badge ${winnerBadgeClass}">
+                                <span>🏆</span> ${pred.winner}
+                            </div>
+                            ${innings1Badges.length > 0 ? `
+                                <div class="prediction-badge innings1">
+                                    <span>🏏 1st Innings:</span> ${innings1Badges.join(' • ')}
+                                </div>
+                            ` : ''}
+                            ${innings2Badges.length > 0 ? `
+                                <div class="prediction-badge innings2">
+                                    <span>🏏 2nd Innings:</span> ${innings2Badges.join(' • ')}
+                                </div>
+                            ` : ''}
+                            ${accuracyIndicator}
+                        </div>
+                        <button class="delete-prediction" onclick="deletePrediction(${pred.matchId})" title="Delete Prediction">
+                            ×
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateStats() {
+            const completedCount = Object.keys(matchResults).length;
+            const predictedCount = Object.keys(predictions).length;
+            const upcomingCount = matches.length - completedCount;
+
+            document.getElementById('matchesPlayed').textContent = completedCount;
+            document.getElementById('predictedMatches').textContent = predictedCount;
+            document.getElementById('upcomingMatches').textContent = upcomingCount;
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('successToast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Close modal on outside click
+        document.getElementById('predictionModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+    </script>
+</body>
+</html>

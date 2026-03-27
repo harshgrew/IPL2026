@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPL 2026 Points Table</title>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+    font-family: 'Rajdhani', sans-serif;
+  background: #0b0f2f;
+  color: #fff;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 60px;
+}
+
+h1 {
+  color: #ffd700;
+  font-size: 36px;
+}
+
+.sub {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.btn {
+  background: #ffd700;
+  color: black;
+  padding: 10px 25px;
+  border-radius: 25px;
+  border: none;
+}
+.btn a {
+  text-decoration: none;
+  color: rgb(21, 23, 69);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+}
+.btun {
+  background: #ffd700;
+  color: black;
+  padding: 10px 25px;
+  border-radius: 25px;
+  border: none;
+}
+
+.container {
+  padding: 40px 60px;
+}
+
+.table-card {
+  background: #1a1f4d;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 25px;
+  text-align: center;
+}
+
+th {
+  background: #2a2f66;
+  color: #bbb;
+  font-size: 13px;
+}
+
+tr {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.team img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.pos {
+  font-weight: bold;
+  color: #aaa;
+}
+
+/* Next Match & Rules Section Styling */
+.info-section {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.next-match, .rules {
+  background: #1a1f4d;
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,215,0,0.1);
+}
+
+.next-match h2, .rules h2 {
+  color: #ffd700;
+  margin-top: 0;
+  font-size: 22px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.match-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.teams-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.team-box {
+  text-align: center;
+  flex: 1;
+}
+
+.team-box img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid #ffd700;
+  object-fit: cover;
+}
+
+.team-box .team-name {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+
+.vs-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255,215,0,0.5);
+}
+
+.match-info {
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.match-info .date-time {
+  color: #ffd700;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.venue {
+  color: #888;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Countdown Timer Styling */
+.countdown-container {
+  background: linear-gradient(135deg, #2a2f66 0%, #1a1f4d 100%);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 15px;
+  text-align: center;
+  border: 1px solid rgba(255,215,0,0.2);
+}
+
+.countdown-label {
+  color: #ffd700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.time-value {
+  background: #ffd700;
+  color: #0b0f2f;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 8px;
+  min-width: 50px;
+  box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+}
+
+.time-label {
+  color: #888;
+  font-size: 11px;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+.rules p {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 8px 0;
+}
+
+@media (max-width: 900px) {
+  .info-section {
+    grid-template-columns: 1fr;
+  }
+  
+  header {
+    padding: 20px 30px;
+  }
+  
+  .container {
+    padding: 20px 30px;
+  }
+  
+  .countdown {
+    gap: 10px;
+  }
+  
+  .time-unit {
+    min-width: 50px;
+  }
+  
+  .time-value {
+    font-size: 20px;
+    padding: 8px 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h1>IPL 2026</h1>
+    <div class="sub">INDIAN PREMIER LEAGUE STANDINGS</div>
+  </div>
+  <button class="btn"><a href="index.html">Home</a></button>
+</header>
+
+<div class="container">
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>POS</th>
+          <th style="text-align:left">TEAM</th>
+          <th>P</th>
+          <th>W</th>
+          <th>L</th>
+          <th>NRR</th>
+          <th>PTS</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="info-section">
+    <!-- Next Match Section -->
+    <div class="next-match">
+      <h2>🏏 Next Match</h2>
+      <div class="match-details">
+        <div class="teams-display">
+          <div class="team-box">
+            <img src="https://www.royalchallengers.com/PRRCB01/public/styles/large/public/2024-03/RCB%20LOGO%20IMAGE%20%281%29.png?itok=AhIkkVKN" alt="RCB">
+            <div class="team-name">RCB</div>
+          </div>
+          <div class="vs-text">VS</div>
+          <div class="team-box">
+            <img src="https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg" alt="SRH">
+            <div class="team-name">SRH</div>
+          </div>
+        </div>
+        
+        <div class="match-info">
+          <div>Match 1 - IPL 2026 Season Opener</div>
+          <div class="date-time">28 March 2026 • 7:30 PM IST</div>
+          <div class="venue">M. Chinnaswamy Stadium, Bengaluru</div>
+        </div>
+
+        <div class="countdown-container">
+          <div class="countdown-label">Match Starts In</div>
+          <div class="countdown" id="countdown">
+            <div class="time-unit">
+              <div class="time-value" id="days">00</div>
+              <div class="time-label">Days</div>
+            </div>
+            <div class="time-unit">
+              <div class="time-value" id="hours">00</div>
+              <div class="time-label">Hours</div>
+            </div>
+            <div class="time-unit">
+              <div class="time-value" id="minutes">00</div>
+              <div class="time-label">Mins</div>
+            </div>
+            <div class="time-unit">
+              <div class="time-value" id="seconds">00</div>
+              <div class="time-label">Secs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules Section -->
+    <div class="rules">
+      <h2>📋 IPL Rules</h2>
+      <p>1. Each team plays 14 matches in league stage.</p>
+      <p>2. Win = 2 points, Loss = 0 points.</p>
+      <p>3. No Result / Tie = 1 point each.</p>
+      <p>4. Teams ranked by total points.</p>
+      <p>5. If points equal → more wins rank higher.</p>
+      <p>6. If still equal → higher Net Run Rate (NRR).</p>
+      <p>7. Top 4 teams qualify for playoffs.</p>
+      <p>8. NRR = (Runs scored / Overs faced) - (Runs conceded / Overs bowled).</p>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// 👉 UPDATE TEAM STATS ONLY FROM HERE
+let teams = [
+     { name: "Chennai Super Kings", logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg" ,p:0, w:0, l:0, nrr:0 },
+            { name: "Mumbai Indians", logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg" ,p:0, w:0, l:0, nrr:0 },
+            { name: "Royal Challengers Bengaluru", logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg", p:0, w:0, l:0, nrr:0 },
+            { name: "Delhi Capitals", logo: "dc.png", p:0, w:0, l:0, nrr:0},
+            { name: "Kolkata Knight Riders", logo: "KKR.jpg", p:0, w:0, l:0, nrr:0 },
+            { name: "Lucknow Super Giants", logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR", p:0, w:0, l:0, nrr:0 },
+            { name: "Gujarat Titans", logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", p:0, w:0, l:0, nrr:0},
+            { name: "Punjab Kings", logo: "pbks.png", p:0, w:0, l:0, nrr:0 },
+            { name: "Rajasthan Royals", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", p:0, w:0, l:0, nrr:0 },
+            { name: "Sunrisers Hyderabad", logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", p:0, w:0, l:0, nrr:0  }
+];
+
+function getPoints(team){
+  return team.w * 2;
+}
+
+function sortTable(){
+  teams.sort((a,b)=>{
+    if(getPoints(b) !== getPoints(a)) return getPoints(b) - getPoints(a);
+    if(b.w !== a.w) return b.w - a.w;
+    return b.nrr - a.nrr;
+  });
+}
+
+function renderTable(){
+  sortTable();
+  let tbody = document.getElementById("tableBody");
+  tbody.innerHTML = "";
+
+  teams.forEach((team,index)=>{
+    let row = `
+    <tr>
+      <td class="pos">${index+1}</td>
+      <td>
+        <div class="team">
+          <img src="${team.logo}">
+          ${team.name}
+        </div>
+      </td>
+      <td>${team.p}</td>
+      <td>${team.w}</td>
+      <td>${team.l}</td>
+      <td>${team.nrr.toFixed(3)}</td>
+      <td>${getPoints(team)}</td>
+    </tr>`;
+    tbody.innerHTML += row;
+  });
+}
+
+renderTable();
+
+// Countdown Timer Functionality
+function updateCountdown() {
+  // Match date: March 28, 2026 at 7:30 PM IST
+  const matchDate = new Date('2026-03-28T19:30:00+05:30');
+  const now = new Date();
+  const difference = matchDate - now;
+
+  if (difference > 0) {
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  } else {
+    // Match has started
+    document.getElementById('countdown').innerHTML = '<div style="color: #ffd700; font-size: 24px; font-weight: bold;">🏆 MATCH LIVE!</div>';
+  }
+}
+
+// Update countdown every second
+setInterval(updateCountdown, 1000);
+updateCountdown(); // Initial call
+
+</script>
+
+</body>
+</html>
