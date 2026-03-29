@@ -503,7 +503,7 @@
         }
         function isMatchLive(match) { const now = new Date(), matchStart = getMatchDateTime(match), matchEnd = new Date(matchStart.getTime() + (4 * 60 * 60 * 1000)); return now >= matchStart && now <= matchEnd; }
         function isFirstInningsLocked(match) { const now = new Date(), matchStart = getMatchDateTime(match); return now >= matchStart; }
-        function isSecondInningsLocked(match) { const now = new Date(), matchDate = getMatchDateTime(match), cutoffTime = new Date(matchDate); cutoffTime.setHours(21, 15, 0, 0); return now >= cutoffTime; }
+        function isSecondInningsLocked(match) { const now = new Date(), matchDate = getMatchDateTime(match), cutoffTime = new Date(matchDate); cutoffTime.setHours(21, 25, 0, 0); return now >= cutoffTime; }
         function checkAndMoveCompletedMatches() { updateStats(); }
         function checkLiveMatches() { renderMatches(); }
         function getCompletedMatches() { return matches.filter(match => matchResults[match.id]); }
@@ -580,11 +580,11 @@
             const liveStatusContainer = document.getElementById('liveStatusContainer'), winnerSection = document.getElementById('winnerSection'), innings1Box = document.getElementById('innings1Box'), innings2Box = document.getElementById('innings2Box'), saveBtn = document.getElementById('savePredictionBtn');
             liveStatusContainer.innerHTML = ''; winnerSection.style.display = 'block'; innings1Box.classList.remove('locked'); innings2Box.classList.remove('locked'); saveBtn.disabled = false; saveBtn.textContent = 'Save My Prediction';
             if (secondInningsLocked) {
-                liveStatusContainer.innerHTML = `<div class="locked-status-message">&#128274; All predictions are locked for this match (cutoff time 9:15 PM reached)</div>`;
+                liveStatusContainer.innerHTML = `<div class="locked-status-message">&#128274; All predictions are locked for this match (cutoff time 9:25 PM reached)</div>`;
                 winnerSection.style.display = 'none'; innings1Box.classList.add('locked'); innings2Box.classList.add('locked'); saveBtn.disabled = true; saveBtn.textContent = 'Predictions Locked';
                 disableAllOptions();
             } else if (firstInningsLocked) {
-                liveStatusContainer.innerHTML = `<div class="live-status-message">&#128308; Match is LIVE! 1st Innings predictions are locked. 2nd Innings predictions still open until 9:15 PM.</div>`;
+                liveStatusContainer.innerHTML = `<div class="live-status-message">&#128308; Match is LIVE! 1st Innings predictions are locked. 2nd Innings predictions still open until 9:25 PM.</div>`;
                 winnerSection.style.display = 'none'; innings1Box.classList.add('locked'); disableInningsOptions(1); innings2Box.classList.remove('locked');
             }
             if (hasPrediction) {
