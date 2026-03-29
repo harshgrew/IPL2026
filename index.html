@@ -43,8 +43,6 @@
         .stat-number { font-family: 'Teko', sans-serif; font-size: 48px; color: var(--ipl-gold); line-height: 1; }
         .stat-card.clickable .stat-number { color: #4caf50; }
         .stat-label { color: #8892b0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-        .admin-btn { position: fixed; bottom: 30px; left: 30px; padding: 15px 25px; background: linear-gradient(135deg, #9c27b0, #7b1fa2); border: none; border-radius: 30px; color: #fff; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 16px; cursor: pointer; box-shadow: 0 5px 20px rgba(156,39,176,0.4); transition: all 0.3s ease; z-index: 999; }
-        .admin-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(156,39,176,0.6); }
         .filter-section { margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; }
         .filter-label { color: var(--ipl-gold); font-weight: 600; font-size: 16px; }
         .team-select-wrapper { position: relative; min-width: 250px; }
@@ -127,7 +125,7 @@
         .innings-box { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; transition: all 0.3s ease; }
         .innings-box.active { border-color: var(--ipl-gold); background: rgba(255,215,0,0.1); }
         .innings-box.locked { opacity: 0.6; border-color: #f44336; position: relative; }
-        .innings-box.locked::after { content: '🔒 LOCKED'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(244,67,54,0.9); color: #fff; padding: 10px 20px; border-radius: 25px; font-weight: 700; font-size: 14px; z-index: 10; }
+        .innings-box.locked::after { content: 'LOCKED'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(244,67,54,0.9); color: #fff; padding: 10px 20px; border-radius: 25px; font-weight: 700; font-size: 14px; z-index: 10; }
         .innings-header { font-family: 'Teko', sans-serif; font-size: 22px; color: var(--ipl-gold); margin-bottom: 15px; text-align: center; border-bottom: 1px solid rgba(255,215,0,0.3); padding-bottom: 10px; }
         .powerplay-container { display: flex; flex-direction: column; gap: 15px; }
         .powerplay-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
@@ -149,28 +147,6 @@
         .save-prediction-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--ipl-gold), #ff8c00); border: none; border-radius: 12px; color: var(--ipl-blue); font-family: 'Teko', sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; margin-top: 20px; }
         .save-prediction-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255,215,0,0.4); }
         .save-prediction-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .admin-modal { max-width: 900px; }
-        .result-input-section { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        .result-input-section h3 { font-family: 'Teko', sans-serif; font-size: 22px; color: var(--ipl-gold); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .result-input-section h3::before { content: ''; width: 4px; height: 20px; background: var(--ipl-gold); border-radius: 2px; }
-        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px; }
-        .form-group { display: flex; flex-direction: column; gap: 8px; }
-        .form-group label { color: #8892b0; font-size: 14px; font-weight: 600; text-transform: uppercase; }
-        .form-group input, .form-group select { padding: 12px 15px; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600; outline: none; transition: all 0.3s ease; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--ipl-gold); background: rgba(255,255,255,0.1); }
-        .form-group input::placeholder { color: #666; }
-        .form-group select option { background: #1a237e; color: #fff; }
-        .innings-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media (max-width: 768px) { .innings-result-grid { grid-template-columns: 1fr; } }
-        .innings-result-box { background: rgba(255,255,255,0.03); border: 2px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; }
-        .innings-result-box h4 { font-family: 'Teko', sans-serif; font-size: 20px; color: #2196f3; margin-bottom: 15px; text-align: center; border-bottom: 1px solid rgba(33,150,243,0.3); padding-bottom: 10px; }
-        .upload-result-btn { width: 100%; padding: 18px; background: linear-gradient(135deg, #4caf50, #45a049); border: none; border-radius: 12px; color: #fff; font-family: 'Teko', sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; margin-top: 20px; }
-        .upload-result-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(76,175,80,0.4); }
-        .points-breakdown { background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); border-radius: 10px; padding: 15px; margin-top: 15px; }
-        .points-breakdown h4 { font-family: 'Teko', sans-serif; font-size: 20px; color: var(--ipl-gold); margin-bottom: 10px; }
-        .points-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
-        .point-item { display: flex; align-items: center; gap: 8px; font-size: 14px; }
-        .point-item span { background: var(--ipl-gold); color: var(--ipl-blue); padding: 2px 8px; border-radius: 10px; font-weight: 700; }
         .predictions-list { display: flex; flex-direction: column; gap: 15px; }
         .prediction-item { background: var(--card-bg); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; transition: all 0.3s ease; }
         .prediction-item:hover { border-color: var(--ipl-gold); transform: translateX(5px); }
@@ -189,8 +165,6 @@
         .accuracy-indicator.correct { background: rgba(76,175,80,0.2); color: #4caf50; }
         .accuracy-indicator.wrong { background: rgba(244,67,54,0.2); color: #f44336; }
         .accuracy-indicator.partial { background: rgba(255,152,0,0.2); color: #ff9800; }
-        .delete-prediction { background: rgba(244,67,54,0.2); border: none; color: #f44336; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .delete-prediction:hover { background: #f44336; color: #fff; transform: rotate(90deg); }
         .empty-state { text-align: center; padding: 60px 20px; color: #8892b0; }
         .empty-state-icon { font-size: 64px; margin-bottom: 20px; opacity: 0.5; }
         .empty-state h3 { font-family: 'Teko', sans-serif; font-size: 32px; color: #fff; margin-bottom: 10px; }
@@ -208,7 +182,6 @@
             .header-content { flex-direction: column; text-align: center; }
             .prediction-item { grid-template-columns: 1fr; text-align: center; }
             .filter-section { flex-direction: column; align-items: stretch; }
-            .admin-btn { bottom: 20px; left: 20px; padding: 12px 20px; font-size: 14px; }
         }
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--dark-bg); }
@@ -224,6 +197,7 @@
         .score-display h5 { color: #4caf50; font-size: 12px; text-transform: uppercase; margin-bottom: 5px; }
         .score-display .score { font-family: 'Teko', sans-serif; font-size: 28px; color: #fff; }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -268,7 +242,7 @@
                         <option value="LSG">Lucknow Super Giants</option>
                         <option value="SRH">Sunrisers Hyderabad</option>
                     </select>
-                    <span class="select-arrow">▼</span>
+                    <span class="select-arrow">&#9660;</span>
                 </div>
                 <button class="clear-filter-btn" onclick="clearFilter()">Clear Filter</button>
             </div>
@@ -284,7 +258,7 @@
             <div class="predictions-list" id="predictionsList"></div>
         </div>
     </div>
-    <!-- <button class="admin-btn" onclick="openAdminModal()">Upload Match Result</button> -->
+
     <div class="modal-overlay" id="predictionModal">
         <div class="modal">
             <div class="modal-header">
@@ -327,74 +301,64 @@
             </div>
         </div>
     </div>
-    <div class="modal-overlay" id="adminModal">
-        <div class="modal admin-modal">
-            <div class="modal-header">
-                <button class="close-btn" onclick="closeAdminModal()">&times;</button>
-                <div style="text-align: center;">
-                    <h2 style="font-family: 'Teko', sans-serif; font-size: 36px; color: var(--ipl-gold);">Upload Match Result</h2>
-                    <p style="color: #8892b0; margin-top: 5px;">Enter actual match results to calculate prediction points</p>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="result-input-section">
-                    <h3>Select Match</h3>
-                    <div class="form-row"><div class="form-group" style="flex: 2;"><label>Match</label><select id="adminMatchSelect" onchange="onAdminMatchChange()"><option value="">-- Select a Match --</option></select></div></div>
-                    <div id="selectedMatchInfo" style="display: none; margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div style="text-align: center;"><img id="adminTeam1Logo" src="" alt="" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; background: #fff;"><p id="adminTeam1Name" style="margin-top: 5px; font-weight: 700;"></p></div>
-                            <div style="font-family: 'Teko', sans-serif; font-size: 24px; color: var(--ipl-orange);">VS</div>
-                            <div style="text-align: center;"><img id="adminTeam2Logo" src="" alt="" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; background: #fff;"><p id="adminTeam2Name" style="margin-top: 5px; font-weight: 700;"></p></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="result-input-section">
-                    <h3>Match Result</h3>
-                    <div class="form-row">
-                        <div class="form-group"><label>Winner</label><select id="adminWinner"><option value="">-- Select Winner --</option></select></div>
-                        <div class="form-group"><label>Win Margin</label><input type="text" id="adminMargin" placeholder="e.g., 6 Wickets / 25 Runs"></div>
-                    </div>
-                </div>
-                <div class="result-input-section">
-                    <h3>Innings Results</h3>
-                    <div class="innings-result-grid">
-                        <div class="innings-result-box">
-                            <h4>1st Innings</h4>
-                            <div class="form-group" style="margin-bottom: 15px;"><label>Powerplay Runs (Actual)</label><input type="number" id="adminPPRuns1" placeholder="e.g., 55" min="0" max="100"></div>
-                            <div class="form-group" style="margin-bottom: 15px;"><label>Powerplay Wickets (Actual)</label><input type="number" id="adminPPWickets1" placeholder="e.g., 2" min="0" max="10"></div>
-                            <div class="form-group"><label>Total Score (Actual)</label><input type="number" id="adminTotalScore1" placeholder="e.g., 185" min="0" max="300"></div>
-                        </div>
-                        <div class="innings-result-box">
-                            <h4>2nd Innings</h4>
-                            <div class="form-group" style="margin-bottom: 15px;"><label>Powerplay Runs (Actual)</label><input type="number" id="adminPPRuns2" placeholder="e.g., 48" min="0" max="100"></div>
-                            <div class="form-group" style="margin-bottom: 15px;"><label>Powerplay Wickets (Actual)</label><input type="number" id="adminPPWickets2" placeholder="e.g., 3" min="0" max="10"></div>
-                            <div class="form-group"><label>Total Score (Actual)</label><input type="number" id="adminTotalScore2" placeholder="e.g., 172" min="0" max="300"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="points-breakdown">
-                    <h4>Points System (Total: 100 Points)</h4>
-                    <div class="points-list">
-                        <div class="point-item"><span>40</span> Correct Winner</div>
-                        <div class="point-item"><span>10</span> 1st Inning PP Runs</div>
-                        <div class="point-item"><span>10</span> 1st Inning PP Wickets</div>
-                        <div class="point-item"><span>10</span> 1st Inning Total Score</div>
-                        <div class="point-item"><span>10</span> 2nd Inning PP Runs</div>
-                        <div class="point-item"><span>10</span> 2nd Inning PP Wickets</div>
-                        <div class="point-item"><span>10</span> 2nd Inning Total Score</div>
-                    </div>
-                </div>
-                <button class="upload-result-btn" onclick="uploadMatchResult()">Upload Match Result</button>
-            </div>
-        </div>
-    </div>
+
     <div class="success-toast" id="successToast">Prediction Saved Successfully!</div>
 
     <script>
         // ============================================
-        // MATCH RESULTS - STORED IN LOCALSTORAGE
+        // HARDCODED MATCH RESULTS - EDIT HERE
         // ============================================
-        let matchResults = JSON.parse(localStorage.getItem('ipl2026_matchResults')) || {};
+        // To add a new completed match result, add an entry like this:
+        // matchId: {
+        //     winner: "RCB",  // Team code of the winner
+        //     result: "RCB Won By 6 Wickets",  // Display text for result
+        //     margin: "6 Wickets",  // Win margin
+        //     innings1: {
+        //         powerplayRuns: 49,  // Actual powerplay runs for 1st innings
+        //         powerplayWickets: 9,  // Actual powerplay wickets for 1st innings
+        //         totalScore: 201  // Actual total score for 1st innings
+        //     },
+        //     innings2: {
+        //         powerplayRuns: 76,  // Actual powerplay runs for 2nd innings
+        //         powerplayWickets: 4,  // Actual powerplay wickets for 2nd innings
+        //         totalScore: 202  // Actual total score for 2nd innings
+        //     }
+        // }
+        // ============================================
+        const matchResults = {
+            1: {
+                winner: "RCB",
+                result: "RCB Won By 6 Wickets (26 balls remaining)",
+                margin: "6 Wickets (26 balls remaining)",
+                innings1: {
+                    powerplayRuns: 49,
+                    powerplayWickets: 9,
+                    totalScore: 201
+                },
+                innings2: {
+                    powerplayRuns: 76,
+                    powerplayWickets: 4,
+                    totalScore: 202
+                }
+            }
+            // Add more completed matches here following the same format
+            // Example for Match 2:
+            // 2: {
+            //     winner: "MI",
+            //     result: "MI Won By 25 Runs",
+            //     margin: "25 Runs",
+            //     innings1: {
+            //         powerplayRuns: 55,
+            //         powerplayWickets: 2,
+            //         totalScore: 185
+            //     },
+            //     innings2: {
+            //         powerplayRuns: 48,
+            //         powerplayWickets: 3,
+            //         totalScore: 160
+            //     }
+            // }
+        };
 
         // Team Logos Mapping
         const teamLogos = {
@@ -417,7 +381,7 @@
         };
 
         const matches = [
-            // { id: 1, date: "Mar 28, Sat", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Sunrisers Hyderabad", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "SRH" },
+            { id: 1, date: "Mar 28, Sat", time: "7:30 PM", team1: "Royal Challengers Bengaluru", team2: "Sunrisers Hyderabad", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "SRH" },
             { id: 2, date: "Mar 29, Sun", time: "7:30 PM", team1: "Mumbai Indians", team2: "Kolkata Knight Riders", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "KKR" },
             { id: 3, date: "Mar 30, Mon", time: "7:30 PM", team1: "Rajasthan Royals", team2: "Chennai Super Kings", venue: "Barsapara Cricket Stadium, Guwahati", t1: "RR", t2: "CSK" },
             { id: 4, date: "Mar 31, Tue", time: "7:30 PM", team1: "Punjab Kings", team2: "Gujarat Titans", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "GT" },
@@ -497,7 +461,7 @@
         let predictionData = { innings1: { powerplayRuns: null, powerplayWickets: null, totalScore: null }, innings2: { powerplayRuns: null, powerplayWickets: null, totalScore: null } };
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderMatches(); updateStats(); generateAllOptions(); checkAndMoveCompletedMatches(); populateAdminMatchSelect();
+            renderMatches(); updateStats(); generateAllOptions(); checkAndMoveCompletedMatches();
             setInterval(checkLiveMatches, 60000);
         });
 
@@ -526,72 +490,6 @@
             return actualValue >= min && actualValue <= max;
         }
 
-        function openAdminModal() { populateAdminMatchSelect(); document.getElementById('adminModal').classList.add('active'); }
-        function closeAdminModal() { document.getElementById('adminModal').classList.remove('active'); resetAdminForm(); }
-        function resetAdminForm() {
-            document.getElementById('adminMatchSelect').value = ''; document.getElementById('selectedMatchInfo').style.display = 'none';
-            document.getElementById('adminWinner').innerHTML = '<option value="">-- Select Winner --</option>';
-            document.getElementById('adminMargin').value = ''; document.getElementById('adminPPRuns1').value = '';
-            document.getElementById('adminPPWickets1').value = ''; document.getElementById('adminTotalScore1').value = '';
-            document.getElementById('adminPPRuns2').value = ''; document.getElementById('adminPPWickets2').value = '';
-            document.getElementById('adminTotalScore2').value = '';
-        }
-        function populateAdminMatchSelect() {
-            const select = document.getElementById('adminMatchSelect');
-            select.innerHTML = '<option value="">-- Select a Match --</option>';
-            matches.filter(m => m.t1 !== 'TBD').forEach(match => {
-                const option = document.createElement('option');
-                option.value = match.id; option.textContent = `Match ${match.id}: ${match.t1} vs ${match.t2} (${match.date})`;
-                select.appendChild(option);
-            });
-        }
-        function onAdminMatchChange() {
-            const matchId = document.getElementById('adminMatchSelect').value;
-            const matchInfo = document.getElementById('selectedMatchInfo');
-            const winnerSelect = document.getElementById('adminWinner');
-            if (!matchId) { matchInfo.style.display = 'none'; winnerSelect.innerHTML = '<option value="">-- Select Winner --</option>'; return; }
-            const match = matches.find(m => m.id == matchId);
-            if (!match) return;
-            document.getElementById('adminTeam1Logo').src = teamLogos[match.t1];
-            document.getElementById('adminTeam1Name').textContent = match.t1;
-            document.getElementById('adminTeam2Logo').src = teamLogos[match.t2];
-            document.getElementById('adminTeam2Name').textContent = match.t2;
-            matchInfo.style.display = 'block';
-            winnerSelect.innerHTML = `<option value="">-- Select Winner --</option><option value="${match.t1}">${match.team1}</option><option value="${match.t2}">${match.team2}</option>`;
-            if (matchResults[matchId]) {
-                const result = matchResults[matchId];
-                winnerSelect.value = result.winner;
-                document.getElementById('adminMargin').value = result.margin || '';
-                if (result.innings1) {
-                    document.getElementById('adminPPRuns1').value = result.innings1.powerplayRuns || '';
-                    document.getElementById('adminPPWickets1').value = result.innings1.powerplayWickets || '';
-                    document.getElementById('adminTotalScore1').value = result.innings1.totalScore || '';
-                }
-                if (result.innings2) {
-                    document.getElementById('adminPPRuns2').value = result.innings2.powerplayRuns || '';
-                    document.getElementById('adminPPWickets2').value = result.innings2.powerplayWickets || '';
-                    document.getElementById('adminTotalScore2').value = result.innings2.totalScore || '';
-                }
-            }
-        }
-        function uploadMatchResult() {
-            const matchId = document.getElementById('adminMatchSelect').value;
-            const winner = document.getElementById('adminWinner').value;
-            const margin = document.getElementById('adminMargin').value.trim();
-            if (!matchId) { alert('Please select a match!'); return; }
-            if (!winner) { alert('Please select a winner!'); return; }
-            const match = matches.find(m => m.id == matchId);
-            const winnerName = winner === match.t1 ? match.team1 : match.team2;
-            const result = {
-                winner: winner, result: `${winnerName} ${margin ? 'Won By ' + margin : 'Won'}`, margin: margin,
-                innings1: { powerplayRuns: parseInt(document.getElementById('adminPPRuns1').value) || 0, powerplayWickets: parseInt(document.getElementById('adminPPWickets1').value) || 0, totalScore: parseInt(document.getElementById('adminTotalScore1').value) || 0 },
-                innings2: { powerplayRuns: parseInt(document.getElementById('adminPPRuns2').value) || 0, powerplayWickets: parseInt(document.getElementById('adminPPWickets2').value) || 0, totalScore: parseInt(document.getElementById('adminTotalScore2').value) || 0 }
-            };
-            matchResults[matchId] = result;
-            localStorage.setItem('ipl2026_matchResults', JSON.stringify(matchResults));
-            showToast('Match Result Uploaded Successfully!');
-            renderMatches(); renderCompletedMatches(); renderPredictions(); updateStats(); closeAdminModal();
-        }
         function getMatchDateTime(match) {
             const year = 2026, monthMap = { 'Mar': 2, 'Apr': 3, 'May': 4 };
             const dateParts = match.date.split(', ')[0].split(' ');
@@ -634,7 +532,7 @@
             const grid = document.getElementById('matchesGrid');
             let matchesToShow = getUpcomingMatches();
             if (currentFilter !== 'all') { matchesToShow = matchesToShow.filter(match => match.t1 === currentFilter || match.t2 === currentFilter); }
-            if (matchesToShow.length === 0) { grid.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon">🏏</div><h3>No Matches Found</h3><p>No upcoming matches found for the selected filter.</p></div>`; return; }
+            if (matchesToShow.length === 0) { grid.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon">&#127951;</div><h3>No Matches Found</h3><p>No upcoming matches found for the selected filter.</p></div>`; return; }
             grid.innerHTML = matchesToShow.map(match => {
                 const hasPrediction = predictions[match.id], isPlayoff = match.id > 70, isLive = isMatchLive(match), firstInningsLocked = isFirstInningsLocked(match), secondInningsLocked = isSecondInningsLocked(match);
                 let statusClass = '', statusText = '', liveIndicator = '';
@@ -643,25 +541,25 @@
                 else if (secondInningsLocked) { statusClass = 'locked'; statusText = 'Locked'; }
                 else if (firstInningsLocked) { statusClass = 'live'; statusText = '2nd Innings Open'; }
                 else { statusClass = 'pending'; statusText = isPlayoff ? 'TBD' : 'Predict Now'; }
-                return `<div class="match-card ${statusClass} ${hasPrediction ? 'predicted' : ''}" onclick="openPredictionModal(${match.id})"><div class="match-header"><span class="match-number">${isPlayoff ? match.team1 : 'Match ' + match.id}</span><span class="match-date">${match.date} • ${match.time}</span></div><div class="match-teams"><div class="team"><div class="team-logo"><img src="${match.t1 !== 'TBD' ? teamLogos[match.t1] : ''}" alt="${match.t1}" onerror="this.style.display='none'"></div><div class="team-name">${match.t1}</div><div class="team-short">${match.team1}</div></div><div class="vs-divider">VS</div><div class="team"><div class="team-logo"><img src="${match.t2 !== 'TBD' ? teamLogos[match.t2] : ''}" alt="${match.t2}" onerror="this.style.display='none'"></div><div class="team-name">${match.t2}</div><div class="team-short">${match.team2}</div></div></div><div class="match-footer"><span class="venue">📍 ${match.venue.split(',')[0]}</span>${liveIndicator}<span class="prediction-status ${statusClass}">${statusText}</span></div></div>`;
+                return `<div class="match-card ${statusClass} ${hasPrediction ? 'predicted' : ''}" onclick="openPredictionModal(${match.id})"><div class="match-header"><span class="match-number">${isPlayoff ? match.team1 : 'Match ' + match.id}</span><span class="match-date">${match.date} &#8226; ${match.time}</span></div><div class="match-teams"><div class="team"><div class="team-logo"><img src="${match.t1 !== 'TBD' ? teamLogos[match.t1] : ''}" alt="${match.t1}" onerror="this.style.display='none'"></div><div class="team-name">${match.t1}</div><div class="team-short">${match.team1}</div></div><div class="vs-divider">VS</div><div class="team"><div class="team-logo"><img src="${match.t2 !== 'TBD' ? teamLogos[match.t2] : ''}" alt="${match.t2}" onerror="this.style.display='none'"></div><div class="team-name">${match.t2}</div><div class="team-short">${match.team2}</div></div></div><div class="match-footer"><span class="venue">&#128205; ${match.venue.split(',')[0]}</span>${liveIndicator}<span class="prediction-status ${statusClass}">${statusText}</span></div></div>`;
             }).join('');
         }
         function renderCompletedMatches() {
             const grid = document.getElementById('completedMatchesGrid');
             const completedMatches = getCompletedMatches();
-            if (completedMatches.length === 0) { grid.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon">🏏</div><h3>No Completed Matches Yet</h3><p>Matches will appear here once they are completed and results are updated.</p></div>`; return; }
+            if (completedMatches.length === 0) { grid.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;"><div class="empty-state-icon">&#127951;</div><h3>No Completed Matches Yet</h3><p>Matches will appear here once they are completed and results are updated.</p></div>`; return; }
             grid.innerHTML = completedMatches.map(match => {
                 const result = matchResults[match.id], hasPrediction = predictions[match.id];
                 let accuracyClass = '', accuracyBadge = '', pointsBadge = '';
                 if (hasPrediction) {
                     const pointsData = calculatePoints(predictions[match.id], result), points = pointsData.total;
-                    if (points === 100) { accuracyClass = 'correct-prediction'; accuracyBadge = '<span class="prediction-accuracy correct">✓ Perfect!</span>'; }
+                    if (points === 100) { accuracyClass = 'correct-prediction'; accuracyBadge = '<span class="prediction-accuracy correct">&#10003; Perfect!</span>'; }
                     else if (points >= 40) { accuracyClass = 'partial'; accuracyBadge = '<span class="prediction-accuracy" style="background: rgba(255,152,0,0.2); color: #ff9800;">~ Partial</span>'; }
                     else if (points > 0) { accuracyClass = 'partial'; accuracyBadge = '<span class="prediction-accuracy" style="background: rgba(255,152,0,0.2); color: #ff9800;">~ Some Correct</span>'; }
-                    else { accuracyClass = 'wrong-prediction'; accuracyBadge = '<span class="prediction-accuracy wrong">✗ Wrong</span>'; }
+                    else { accuracyClass = 'wrong-prediction'; accuracyBadge = '<span class="prediction-accuracy wrong">&#10007; Wrong</span>'; }
                     pointsBadge = `<span class="points-earned">${points}/100 pts</span>`;
                 }
-                return `<div class="match-card completed ${accuracyClass}"><div class="match-header"><span class="match-number">Match ${match.id}</span><span class="match-date">${match.date} • ${match.time}</span></div><div class="match-teams"><div class="team"><div class="team-logo"><img src="${match.t1 !== 'TBD' ? teamLogos[match.t1] : ''}" alt="${match.t1}" onerror="this.style.display='none'"></div><div class="team-name">${match.t1}</div><div class="team-short">${match.team1}</div></div><div class="vs-divider">VS</div><div class="team"><div class="team-logo"><img src="${match.t2 !== 'TBD' ? teamLogos[match.t2] : ''}" alt="${match.t2}" onerror="this.style.display='none'"></div><div class="team-name">${match.t2}</div><div class="team-short">${match.team2}</div></div></div><div class="match-result">🏆 ${result.result}</div><div class="match-footer"><span class="venue">📍 ${match.venue.split(',')[0]}</span>${accuracyBadge}${pointsBadge}<span class="prediction-status ${hasPrediction ? 'completed' : 'pending'}">${hasPrediction ? 'Predicted' : 'No Prediction'}</span></div></div>`;
+                return `<div class="match-card completed ${accuracyClass}"><div class="match-header"><span class="match-number">Match ${match.id}</span><span class="match-date">${match.date} &#8226; ${match.time}</span></div><div class="match-teams"><div class="team"><div class="team-logo"><img src="${match.t1 !== 'TBD' ? teamLogos[match.t1] : ''}" alt="${match.t1}" onerror="this.style.display='none'"></div><div class="team-name">${match.t1}</div><div class="team-short">${match.team1}</div></div><div class="vs-divider">VS</div><div class="team"><div class="team-logo"><img src="${match.t2 !== 'TBD' ? teamLogos[match.t2] : ''}" alt="${match.t2}" onerror="this.style.display='none'"></div><div class="team-name">${match.t2}</div><div class="team-short">${match.team2}</div></div></div><div class="match-result">&#127942; ${result.result}</div><div class="match-footer"><span class="venue">&#128205; ${match.venue.split(',')[0]}</span>${accuracyBadge}${pointsBadge}<span class="prediction-status ${hasPrediction ? 'completed' : 'pending'}">${hasPrediction ? 'Predicted' : 'No Prediction'}</span></div></div>`;
             }).join('');
         }
         function showCompletedMatches() { document.getElementById('scheduleSection').style.display = 'none'; document.getElementById('predictionsSection').style.display = 'none'; document.getElementById('completedMatchesSection').style.display = 'block'; document.getElementById('completedMatchesSection').classList.add('active'); document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active')); renderCompletedMatches(); }
@@ -682,11 +580,11 @@
             const liveStatusContainer = document.getElementById('liveStatusContainer'), winnerSection = document.getElementById('winnerSection'), innings1Box = document.getElementById('innings1Box'), innings2Box = document.getElementById('innings2Box'), saveBtn = document.getElementById('savePredictionBtn');
             liveStatusContainer.innerHTML = ''; winnerSection.style.display = 'block'; innings1Box.classList.remove('locked'); innings2Box.classList.remove('locked'); saveBtn.disabled = false; saveBtn.textContent = 'Save My Prediction';
             if (secondInningsLocked) {
-                liveStatusContainer.innerHTML = `<div class="locked-status-message">🔒 All predictions are locked for this match (cutoff time 9:15 PM reached)</div>`;
+                liveStatusContainer.innerHTML = `<div class="locked-status-message">&#128274; All predictions are locked for this match (cutoff time 9:15 PM reached)</div>`;
                 winnerSection.style.display = 'none'; innings1Box.classList.add('locked'); innings2Box.classList.add('locked'); saveBtn.disabled = true; saveBtn.textContent = 'Predictions Locked';
                 disableAllOptions();
             } else if (firstInningsLocked) {
-                liveStatusContainer.innerHTML = `<div class="live-status-message">🔴 Match is LIVE! 1st Innings predictions are locked. 2nd Innings predictions still open until 9:15 PM.</div>`;
+                liveStatusContainer.innerHTML = `<div class="live-status-message">&#128308; Match is LIVE! 1st Innings predictions are locked. 2nd Innings predictions still open until 9:15 PM.</div>`;
                 winnerSection.style.display = 'none'; innings1Box.classList.add('locked'); disableInningsOptions(1); innings2Box.classList.remove('locked');
             }
             if (hasPrediction) {
@@ -723,31 +621,30 @@
         function showSection(section) { document.getElementById('scheduleSection').style.display = 'none'; document.getElementById('predictionsSection').style.display = 'none'; document.getElementById('completedMatchesSection').style.display = 'none'; document.getElementById('completedMatchesSection').classList.remove('active'); document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active')); if (section === 'schedule') { document.getElementById('scheduleSection').style.display = 'block'; event.target.classList.add('active'); renderMatches(); } else if (section === 'predictions') { document.getElementById('predictionsSection').style.display = 'block'; event.target.classList.add('active'); renderPredictions(); } }
         function renderPredictions() {
             const list = document.getElementById('predictionsList'), preds = Object.values(predictions);
-            if (preds.length === 0) { list.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🏏</div><h3>No Predictions Yet</h3><p>Click on any match in the schedule to make your first prediction!</p></div>`; return; }
+            if (preds.length === 0) { list.innerHTML = `<div class="empty-state"><div class="empty-state-icon">&#127951;</div><h3>No Predictions Yet</h3><p>Click on any match in the schedule to make your first prediction!</p></div>`; return; }
             preds.sort((a, b) => a.matchId - b.matchId);
             list.innerHTML = preds.map(pred => {
                 const innings1Badges = [], innings2Badges = [];
-                if (pred.innings1) { if (pred.innings1.powerplayRuns) innings1Badges.push(`<span>⚡ PP Runs: ${pred.innings1.powerplayRuns}</span>`); if (pred.innings1.powerplayWickets) innings1Badges.push(`<span>🎯 PP Wkts: ${pred.innings1.powerplayWickets}</span>`); if (pred.innings1.totalScore) innings1Badges.push(`<span>📊 Score: ${pred.innings1.totalScore}</span>`); }
-                if (pred.innings2) { if (pred.innings2.powerplayRuns) innings2Badges.push(`<span>⚡ PP Runs: ${pred.innings2.powerplayRuns}</span>`); if (pred.innings2.powerplayWickets) innings2Badges.push(`<span>🎯 PP Wkts: ${pred.innings2.powerplayWickets}</span>`); if (pred.innings2.totalScore) innings2Badges.push(`<span>📊 Score: ${pred.innings2.totalScore}</span>`); }
+                if (pred.innings1) { if (pred.innings1.powerplayRuns) innings1Badges.push(`<span>&#9889; PP Runs: ${pred.innings1.powerplayRuns}</span>`); if (pred.innings1.powerplayWickets) innings1Badges.push(`<span>&#127919; PP Wkts: ${pred.innings1.powerplayWickets}</span>`); if (pred.innings1.totalScore) innings1Badges.push(`<span>&#128202; Score: ${pred.innings1.totalScore}</span>`); }
+                if (pred.innings2) { if (pred.innings2.powerplayRuns) innings2Badges.push(`<span>&#9889; PP Runs: ${pred.innings2.powerplayRuns}</span>`); if (pred.innings2.powerplayWickets) innings2Badges.push(`<span>&#127919; PP Wkts: ${pred.innings2.powerplayWickets}</span>`); if (pred.innings2.totalScore) innings2Badges.push(`<span>&#128202; Score: ${pred.innings2.totalScore}</span>`); }
                 const matchResult = matchResults[pred.matchId];
                 let accuracyIndicator = '', itemClass = '', winnerBadgeClass = 'winner', pointsDisplay = '';
                 if (matchResult) {
                     const pointsData = calculatePoints(pred, matchResult), points = pointsData.total;
-                    if (points === 100) { accuracyIndicator = `<div class="accuracy-indicator correct">✓ PERFECT! ${points}/100 pts</div>`; itemClass = 'correct'; }
+                    if (points === 100) { accuracyIndicator = `<div class="accuracy-indicator correct">&#10003; PERFECT! ${points}/100 pts</div>`; itemClass = 'correct'; }
                     else if (points >= 40) { accuracyIndicator = `<div class="accuracy-indicator partial">~ ${points}/100 pts</div>`; itemClass = 'partial'; }
                     else if (points > 0) { accuracyIndicator = `<div class="accuracy-indicator partial">~ ${points}/100 pts</div>`; itemClass = 'partial'; }
-                    else { accuracyIndicator = `<div class="accuracy-indicator wrong">✗ 0/100 pts</div>`; itemClass = 'wrong'; winnerBadgeClass = 'winner wrong'; }
+                    else { accuracyIndicator = `<div class="accuracy-indicator wrong">&#10007; 0/100 pts</div>`; itemClass = 'wrong'; winnerBadgeClass = 'winner wrong'; }
                     const bd = pointsData.breakdown, breakdownItems = [];
                     if (bd.winner) breakdownItems.push('Winner'); if (bd.innings1PPRuns) breakdownItems.push('1st PP Runs'); if (bd.innings1PPWickets) breakdownItems.push('1st PP Wkts'); if (bd.innings1Total) breakdownItems.push('1st Total'); if (bd.innings2PPRuns) breakdownItems.push('2nd PP Runs'); if (bd.innings2PPWickets) breakdownItems.push('2nd PP Wkts'); if (bd.innings2Total) breakdownItems.push('2nd Total');
                     if (breakdownItems.length > 0) pointsDisplay = `<div style="font-size: 12px; color: #8892b0; margin-top: 5px;">Correct: ${breakdownItems.join(', ')}</div>`;
-                } else { accuracyIndicator = `<div class="accuracy-indicator" style="background: rgba(255,215,0,0.1); color: var(--ipl-gold);">⏳ PENDING</div>`; }
-                return `<div class="prediction-item ${itemClass}"><div class="prediction-match-info"><h4>Match ${pred.matchId}: ${pred.match}</h4><p>${pred.date} • ${pred.venue}</p></div><div class="prediction-details"><div class="prediction-badge ${winnerBadgeClass}"><span>🏆</span> ${pred.winner}</div>${innings1Badges.length > 0 ? `<div class="prediction-badge innings1"><span>🏏 1st Innings:</span> ${innings1Badges.join(' • ')}</div>` : ''}${innings2Badges.length > 0 ? `<div class="prediction-badge innings2"><span>🏏 2nd Innings:</span> ${innings2Badges.join(' • ')}</div>` : ''}${accuracyIndicator}${pointsDisplay}</div></div>`;
+                } else { accuracyIndicator = `<div class="accuracy-indicator" style="background: rgba(255,215,0,0.1); color: var(--ipl-gold);">&#9203; PENDING</div>`; }
+                return `<div class="prediction-item ${itemClass}"><div class="prediction-match-info"><h4>Match ${pred.matchId}: ${pred.match}</h4><p>${pred.date} &#8226; ${pred.venue}</p></div><div class="prediction-details"><div class="prediction-badge ${winnerBadgeClass}"><span>&#127942;</span> ${pred.winner}</div>${innings1Badges.length > 0 ? `<div class="prediction-badge innings1"><span>&#127951; 1st Innings:</span> ${innings1Badges.join(' &#8226; ')}</div>` : ''}${innings2Badges.length > 0 ? `<div class="prediction-badge innings2"><span>&#127951; 2nd Innings:</span> ${innings2Badges.join(' &#8226; ')}</div>` : ''}${accuracyIndicator}${pointsDisplay}</div></div>`;
             }).join('');
         }
         function updateStats() { const completedCount = Object.keys(matchResults).length, predictedCount = Object.keys(predictions).length, upcomingCount = matches.length - completedCount; document.getElementById('matchesPlayed').textContent = completedCount; document.getElementById('predictedMatches').textContent = predictedCount; document.getElementById('upcomingMatches').textContent = upcomingCount; }
         function showToast(message) { const toast = document.getElementById('successToast'); toast.textContent = message; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3000); }
         document.getElementById('predictionModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(); });
-        document.getElementById('adminModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeAdminModal(); });
     </script>
 </body>
 </html>
