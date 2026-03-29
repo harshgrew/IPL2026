@@ -625,8 +625,8 @@
             preds.sort((a, b) => a.matchId - b.matchId);
             list.innerHTML = preds.map(pred => {
                 const innings1Badges = [], innings2Badges = [];
-                if (pred.innings1) { if (pred.innings1.powerplayRuns) innings1Badges.push(`<span>&#9889; PP Runs: ${pred.innings1.powerplayRuns}</span>`); if (pred.innings1.powerplayWickets) innings1Badges.push(`<span>&#127919; PP Wkts: ${pred.innings1.powerplayWickets}</span>`); if (pred.innings1.totalScore) innings1Badges.push(`<span>&#128202; Score: ${pred.innings1.totalScore}</span>`); }
-                if (pred.innings2) { if (pred.innings2.powerplayRuns) innings2Badges.push(`<span>&#9889; PP Runs: ${pred.innings2.powerplayRuns}</span>`); if (pred.innings2.powerplayWickets) innings2Badges.push(`<span>&#127919; PP Wkts: ${pred.innings2.powerplayWickets}</span>`); if (pred.innings2.totalScore) innings2Badges.push(`<span>&#128202; Score: ${pred.innings2.totalScore}</span>`); }
+                if (pred.innings1) { if (pred.innings1.powerplayRuns) innings1Badges.push(`<span>&#9889; PP Runs: ${pred.innings1.powerplayRuns}</span>`); if (pred.innings1.powerplayWickets) innings1Badges.push(`<span>&#127919; Total Wkts: ${pred.innings1.powerplayWickets}</span>`); if (pred.innings1.totalScore) innings1Badges.push(`<span>&#128202; Score: ${pred.innings1.totalScore}</span>`); }
+                if (pred.innings2) { if (pred.innings2.powerplayRuns) innings2Badges.push(`<span>&#9889; PP Runs: ${pred.innings2.powerplayRuns}</span>`); if (pred.innings2.powerplayWickets) innings2Badges.push(`<span>&#127919; Total Wkts: ${pred.innings2.powerplayWickets}</span>`); if (pred.innings2.totalScore) innings2Badges.push(`<span>&#128202; Score: ${pred.innings2.totalScore}</span>`); }
                 const matchResult = matchResults[pred.matchId];
                 let accuracyIndicator = '', itemClass = '', winnerBadgeClass = 'winner', pointsDisplay = '';
                 if (matchResult) {
