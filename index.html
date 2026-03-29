@@ -631,9 +631,9 @@
                 let accuracyIndicator = '', itemClass = '', winnerBadgeClass = 'winner', pointsDisplay = '';
                 if (matchResult) {
                     const pointsData = calculatePoints(pred, matchResult), points = pointsData.total;
-                    if (points === 100) { accuracyIndicator = `<div class="accuracy-indicator correct">&#10003; PERFECT! ${points}/100 pts</div>`; itemClass = 'correct'; }
-                    else if (points >= 40) { accuracyIndicator = `<div class="accuracy-indicator partial">~ ${points}/100 pts</div>`; itemClass = 'partial'; }
-                    else if (points > 0) { accuracyIndicator = `<div class="accuracy-indicator partial">~ ${points}/100 pts</div>`; itemClass = 'partial'; }
+                    if (points === 100) { accuracyIndicator = `<div class="accuracy-indicator correct">&#10003; PERFECT ${points}/100 pts</div>`; itemClass = 'correct'; }
+                    else if (points >= 40) { accuracyIndicator = `<div class="accuracy-indicator partial">${points}/100 pts</div>`; itemClass = 'partial'; }
+                    else if (points > 0) { accuracyIndicator = `<div class="accuracy-indicator partial">${points}/100 pts</div>`; itemClass = 'partial'; }
                     else { accuracyIndicator = `<div class="accuracy-indicator wrong">&#10007; 0/100 pts</div>`; itemClass = 'wrong'; winnerBadgeClass = 'winner wrong'; }
                     const bd = pointsData.breakdown, breakdownItems = [];
                     if (bd.winner) breakdownItems.push('Winner'); if (bd.innings1PPRuns) breakdownItems.push('1st PP Runs'); if (bd.innings1PPWickets) breakdownItems.push('1st Wkts'); if (bd.innings1Total) breakdownItems.push('1st Total'); if (bd.innings2PPRuns) breakdownItems.push('2nd PP Runs'); if (bd.innings2PPWickets) breakdownItems.push('2nd Wkts'); if (bd.innings2Total) breakdownItems.push('2nd Total');
