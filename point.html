@@ -342,20 +342,20 @@ tr {
       <div class="match-details">
         <div class="teams-display">
           <div class="team-box">
-            <img src="https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg" alt="GT">
-            <div class="team-name">GT</div>
+            <img src="dc.png" alt="DC">
+            <div class="team-name">DC</div>
           </div>
           <div class="vs-text">VS</div>
           <div class="team-box">
-            <img src="pbks.png" alt="PBKS">
-            <div class="team-name">PBKS</div>
+            <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR" alt="LSG">
+            <div class="team-name">LSG</div>
           </div>
         </div>
         
         <div class="match-info">
-          <div>Match 4 - IPL 2026 </div>
-          <div class="date-time">31 March 2026 • 7:30 PM IST</div>
-          <div class="venue">Maharaja Yadavindra Cricket Stadium, Mullanpur</div>
+          <div>Match 5 - IPL 2026 </div>
+          <div class="date-time">01 April 2026 • 7:30 PM IST</div>
+          <div class="venue">Ekana Cricket Stadium,Lucknow</div>
         </div>
 
         <div class="countdown-container">
@@ -407,8 +407,8 @@ let teams = [
             { name: "Delhi Capitals", shortName: "DC", logo: "dc.png", p:0, w:0, l:0, nrr:0},
             { name: "Kolkata Knight Riders", shortName: "KKR", logo: "KKR.jpg", p:1, w:0, l:1, nrr:-0.687 },
             { name: "Lucknow Super Giants", shortName: "LSG", logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR", p:0, w:0, l:0, nrr:0 },
-            { name: "Gujarat Titans", shortName: "GT", logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", p:0, w:0, l:0, nrr:0},
-            { name: "Punjab Kings", shortName: "PBKS", logo: "pbks.png", p:0, w:0, l:0, nrr:0 },
+            { name: "Gujarat Titans", shortName: "GT", logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", p:1, w:0, l:1, nrr:-0.509},
+            { name: "Punjab Kings", shortName: "PBKS", logo: "pbks.png", p:1, w:1, l:0, nrr:+0.509 },
             { name: "Rajasthan Royals", shortName: "RR", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", p:1, w:1, l:0, nrr: +4.171 },
             { name: "Sunrisers Hyderabad", shortName: "SRH", logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", p:1, w:0, l:1, nrr:-2.906  }
 ];
@@ -456,7 +456,7 @@ renderTable();
 // Countdown Timer Functionality
 function updateCountdown() {
   // Match date: March 28, 2026 at 7:30 PM IST
-  const matchDate = new Date('2026-03-31T19:30:00+05:30');
+  const matchDate = new Date('2026-04-01T19:30:00+05:30');
   const now = new Date();
   const difference = matchDate - now;
 
