@@ -326,6 +326,7 @@
         // }
         // ============================================
         const matchResults = {
+            
              3: {
                 winner: "RR",
                 result: "RR Won By 8 Wickets (71 balls ramaining)",
@@ -373,6 +374,21 @@
                     totalScore: 202
                 }
             },
+            4: {
+                winner: "PBKS",
+                result: "PBKS Won By 3 Wickets (5 balls ramaining)",
+                margin: "5 balls",
+                innings1: {
+                    powerplayRuns: 54,
+                    powerplayWickets: 6,
+                    totalScore: 162
+                },
+                innings2: {
+                    powerplayRuns: 55,
+                    powerplayWickets: 7,
+                    totalScore: 165
+                }
+            },
         };
 
         // Team Logos Mapping
@@ -398,8 +414,8 @@
         const matches = [
             { id: 1, date: "Mar 28, Sat", time: "7:30 PM", team1: "203-4 (15.4/20)", team2: "201-9 (20/20)", venue: "M. Chinnaswamy Stadium, Bengaluru", t1: "RCB", t2: "SRH" },
             { id: 2, date: "Mar 29, Sun", time: "7:30 PM", team1: "224-4 (19.1/20)", team2: "220-4 (20/20)", venue: "Wankhede Stadium, Mumbai", t1: "MI", t2: "KKR" },
-            { id: 3, date: "Mar 30, Mon", time: "7:30 PM", team1: "Rajasthan Royals", team2: "Chennai Super Kings", venue: "Barsapara Cricket Stadium, Guwahati", t1: "RR", t2: "CSK" },
-            { id: 4, date: "Mar 31, Tue", time: "7:30 PM", team1: "Punjab Kings", team2: "Gujarat Titans", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "GT" },
+            { id: 3, date: "Mar 30, Mon", time: "7:30 PM", team1: "128-2 (12.1/20)", team2: "127-10 (19.4/20)", venue: "Barsapara Cricket Stadium, Guwahati", t1: "RR", t2: "CSK" },
+            { id: 4, date: "Mar 31, Tue", time: "7:30 PM", team1: "165-7 (19.1/20)", team2: "162-6 (20/20)", venue: "Maharaja Yadavindra Singh Stadium, Mullanpur", t1: "PBKS", t2: "GT" },
             { id: 5, date: "Apr 1, Wed", time: "7:30 PM", team1: "Lucknow Super Giants", team2: "Delhi Capitals", venue: "BRSABV Ekana Cricket Stadium, Lucknow", t1: "LSG", t2: "DC" },
             { id: 6, date: "Apr 2, Thu", time: "7:30 PM", team1: "Kolkata Knight Riders", team2: "Sunrisers Hyderabad", venue: "Eden Gardens, Kolkata", t1: "KKR", t2: "SRH" },
             { id: 7, date: "Apr 3, Fri", time: "7:30 PM", team1: "Chennai Super Kings", team2: "Punjab Kings", venue: "M. A. Chidambaram Stadium, Chennai", t1: "CSK", t2: "PBKS" },
