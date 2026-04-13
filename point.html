@@ -961,20 +961,21 @@ footer {
       <div class="match-details">
         <div class="teams-display">
           <div class="team-box">
-            <img src="dc.png" alt="DC">
-            <div class="team-name">Delhi Capitals</div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png" alt="RR">
+            <div class="team-name">RR</div>
           </div>
           <div class="vs-text">VS</div>
           <div class="team-box">
-            <img src="https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg" alt="GT">
-            <div class="team-name">Gujarat Titans</div>
+            <img src="https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg" alt="SRH">
+            <div class="team-name">SRH</div>
           </div>
         </div>
         
         <div class="match-info">
-          <div class="match-number">Match 12 • IPL 2026</div>
-          <div class="date-time">April 8, 2026 • 7:30 PM IST</div>
-          <div class="venue">📍 Arun Jaitley Stadium, Delhi</div>
+          <div>Match 21 - IPL 2026 </div>
+          <div class="date-time">13 April 2026 • 8:30 PM IST</div>
+          <div class="venue">Rajiv Gandhi Stadium, Hyderabad</div>
+         
         </div>
 
         <div class="countdown-container">
@@ -1063,16 +1064,16 @@ footer {
 // Format: { name, shortName, logo, p (played), w (wins), l (losses), d (draws/no result), nrr, form (last 5 matches: W/L/D) }
 // ==========================================
 let teams = [
-  { name: "Chennai Super Kings", shortName: "CSK", logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg", p: 3, w: 0, l: 3, d:0, nrr: -2.517, form: ["L", "L", "L"] },
-  { name: "Mumbai Indians", shortName: "MI", logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg", p: 2, w: 1, l: 1, d: 0, nrr: -0.206, form: ["L", "W",] },
-  { name: "Royal Challengers Bengaluru", shortName: "RCB", logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg", p: 2, w: 2, l: 0, d: 0, nrr: 2.501, form: ["W", "W",] },
-  { name: "Delhi Capitals", shortName: "DC", logo: "dc.png", p: 2, w: 2, l: 0, d: 0, nrr: 1.170, form: ["W", "W",] },
-  { name: "Kolkata Knight Riders", shortName: "KKR", logo: "KKR.jpg", p: 3, w: 0, l: 2, d: 1, nrr: -1.964, form: ["L", "L", "D"] },
-  { name: "Lucknow Super Giants", shortName: "LSG", logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR", p: 2, w: 1, l: 1, d: 1, nrr: -0.542, form: ["L", "W", "D"] },
-  { name: "Gujarat Titans", shortName: "GT", logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", p: 2, w: 0, l: 2, d: 0, nrr: -0.424, form: ["L", "L",] },
-  { name: "Punjab Kings", shortName: "PBKS", logo: "pbks.png", p: 3, w: 2, l: 0, d: 1, nrr: 0.637, form: ["W", "D", "W"] },
-  { name: "Rajasthan Royals", shortName: "RR", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", p: 2, w: 2, l: 0, d: 0, nrr: 2.233, form: ["W", "W"] },
-  { name: "Sunrisers Hyderabad", shortName: "SRH", logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", p: 3, w: 1, l: 2, d: 0, nrr: 0.275, form: ["W", "L", "L"] }
+ { name: "Chennai Super Kings", shortName: "CSK", logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg ", p: 4, w: 1, l: 3, d:0, nrr: -1.517, form: ["L", "L", "L", "W"] },
+{ name: "Mumbai Indians", shortName: "MI", logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg ", p: 4, w: 1, l: 3, d: 0, nrr: -0.806, form: ["L", "W", "L", "L"] },
+{ name: "Royal Challengers Bengaluru", shortName: "RCB", logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg ", p: 4, w: 3, l: 1, d: 0, nrr: 2.201, form: ["W", "W", "L", "W"] },
+{ name: "Delhi Capitals", shortName: "DC", logo: "dc.png", p: 4, w: 2, l: 2, d: 0, nrr: 0.670, form: ["W", "W", "L", "L"] },
+{ name: "Kolkata Knight Riders", shortName: "KKR", logo: "KKR.jpg", p: 4, w: 0, l: 3, d: 1, nrr: -2.164, form: ["L", "L", "D", "L"] },
+{ name: "Lucknow Super Giants", shortName: "LSG", logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR ", p: 4, w: 2, l: 1, d: 1, nrr: -0.142, form: ["L", "W", "D", "W"] },
+{ name: "Gujarat Titans", shortName: "GT", logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg ", p: 4, w: 2, l: 2, d: 0, nrr: -0.124, form: ["L", "L", "W", "W"] },
+{ name: "Punjab Kings", shortName: "PBKS", logo: "pbks.png", p: 4, w: 3, l: 0, d: 1, nrr: 1.137, form: ["W", "D", "W", "W"] },
+{ name: "Rajasthan Royals", shortName: "RR", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png ", p: 4, w: 4, l: 0, d: 0, nrr: 2.733, form: ["W", "W", "W", "W"] },
+{ name: "Sunrisers Hyderabad", shortName: "SRH", logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg ", p: 4, w: 1, l: 3, d: 0, nrr: -0.225, form: ["W", "L", "L", "L"] }
 ];
 
 // Calculate Points: Win = 2, Draw = 1, Loss = 0
@@ -1182,7 +1183,7 @@ function updateStats() {
 // Countdown Timer for Next Match
 function updateCountdown() {
   // Next match: April 8, 2026 at 7:30 PM IST
-  const matchDate = new Date('2026-04-08T19:30:00+05:30');
+  const matchDate = new Date('2026-04-13T19:30:00+05:30');
   const now = new Date();
   const difference = matchDate - now;
 
