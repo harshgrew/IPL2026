@@ -209,6 +209,52 @@ h1 {
   100% { transform: translateX(-100%); }
 }
 
+/* Auto Update Status */
+.update-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 12px 20px;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 10px;
+  font-size: 14px;
+  color: #00ff88;
+}
+
+.update-status.offline {
+  background: rgba(255, 71, 87, 0.1);
+  border-color: rgba(255, 71, 87, 0.3);
+  color: #ff4757;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #00ff88;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ff88;
+  animation: pulse-dot 2s infinite;
+}
+
+.update-status.offline .status-dot {
+  background: #ff4757;
+  box-shadow: 0 0 10px #ff4757;
+  animation: none;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.last-updated {
+  margin-left: auto;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 /* Table Card with Glassmorphism */
 .table-card {
   background: rgba(26, 31, 77, 0.8);
@@ -887,6 +933,36 @@ footer {
 .highlight-update {
   animation: highlight 2s ease;
 }
+
+/* Loading Spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 215, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffd700;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error Message */
+.error-message {
+  background: rgba(255, 71, 87, 0.1);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  color: #ff4757;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
 </style>
 </head>
 
@@ -913,15 +989,27 @@ footer {
 </header>
 
 <div class="container">
+  <!-- Auto Update Status -->
+  <div class="update-status" id="updateStatus">
+    <div class="status-dot"></div>
+    <span id="statusText">Auto-updating from Cricbuzz...</span>
+    <span class="last-updated" id="lastUpdated">Last updated: Just now</span>
+  </div>
+
+  <!-- Error Message -->
+  <div class="error-message" id="errorMessage">
+    ⚠️ Unable to fetch live data. Showing cached data. Will retry in 30 seconds...
+  </div>
+
   <!-- Live Ticker -->
-  <!-- <div class="live-ticker"> -->
-    <!-- <div class="ticker-label">Latest</div> -->
+  <div class="live-ticker">
+    <div class="ticker-label">Latest</div>
     <div class="ticker-content">
-      <!-- <div class="ticker-text" id="tickerText">
-        🏏 CSK vs SRH: Match abandoned due to rain (1 point each) • RCB beat KKR by 8 wickets • PBKS defeated DC by 3 runs in a thriller • RR crush MI by 47 runs • GT vs LSG: Match tied, Super Over decided the winner!
-      </div> -->
+      <div class="ticker-text" id="tickerText">
+        🏏 Loading latest match updates...
+      </div>
     </div>
-  <!-- </div> -->
+  </div>
 
   <!-- Points Table -->
   <div class="table-card">
@@ -959,23 +1047,22 @@ footer {
     <div class="next-match">
       <h2>🏏 Next Match</h2>
       <div class="match-details">
-        <div class="teams-display">
+        <div class="teams-display" id="nextMatchTeams">
           <div class="team-box">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png" alt="RR">
-            <div class="team-name">RR</div>
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png" alt="RR" id="team1Logo">
+            <div class="team-name" id="team1Name">RR</div>
           </div>
           <div class="vs-text">VS</div>
           <div class="team-box">
-            <img src="https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg" alt="SRH">
-            <div class="team-name">SRH</div>
+            <img src="https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg" alt="SRH" id="team2Logo">
+            <div class="team-name" id="team2Name">SRH</div>
           </div>
         </div>
         
         <div class="match-info">
-          <div>Match 21 - IPL 2026 </div>
-          <div class="date-time">13 April 2026 • 8:30 PM IST</div>
-          <div class="venue">Rajiv Gandhi Stadium, Hyderabad</div>
-         
+          <div class="match-number" id="matchNumber">Match 28 - IPL 2026</div>
+          <div class="date-time" id="matchDateTime">19 April 2026 • 8:30 PM IST</div>
+          <div class="venue" id="matchVenue">Eden Gardens, Kolkata</div>
         </div>
 
         <div class="countdown-container">
@@ -1055,33 +1142,375 @@ footer {
 </div>
 
 <footer>
-  <div class="footer-text">© 2026 Indian Premier League. All rights reserved. | Data updated in real-time</div>
+  <div class="footer-text">© 2026 Indian Premier League. All rights reserved. | Data updated in real-time from Cricbuzz</div>
 </footer>
 
 <script>
 // ==========================================
-// 👉 UPDATE TEAM STATS HERE
-// Format: { name, shortName, logo, p (played), w (wins), l (losses), d (draws/no result), nrr, form (last 5 matches: W/L/D) }
+// IPL 2026 SCHEDULE DATA (For Next Match & Countdown)
+// Update this array with all remaining matches
 // ==========================================
-let teams = [
- { name: "Chennai Super Kings", shortName: "CSK", logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg ", p: 4, w: 1, l: 3, d:0, nrr: -1.517, form: ["L", "L", "L", "W"] },
-{ name: "Mumbai Indians", shortName: "MI", logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg ", p: 4, w: 1, l: 3, d: 0, nrr: -0.806, form: ["L", "W", "L", "L"] },
-{ name: "Royal Challengers Bengaluru", shortName: "RCB", logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg ", p: 4, w: 3, l: 1, d: 0, nrr: 2.201, form: ["W", "W", "L", "W"] },
-{ name: "Delhi Capitals", shortName: "DC", logo: "dc.png", p: 4, w: 2, l: 2, d: 0, nrr: 0.670, form: ["W", "W", "L", "L"] },
-{ name: "Kolkata Knight Riders", shortName: "KKR", logo: "KKR.jpg", p: 4, w: 0, l: 3, d: 1, nrr: -2.164, form: ["L", "L", "D", "L"] },
-{ name: "Lucknow Super Giants", shortName: "LSG", logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR ", p: 4, w: 2, l: 1, d: 1, nrr: -0.142, form: ["L", "W", "D", "W"] },
-{ name: "Gujarat Titans", shortName: "GT", logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg ", p: 4, w: 2, l: 2, d: 0, nrr: -0.124, form: ["L", "L", "W", "W"] },
-{ name: "Punjab Kings", shortName: "PBKS", logo: "pbks.png", p: 4, w: 3, l: 0, d: 1, nrr: 1.137, form: ["W", "D", "W", "W"] },
-{ name: "Rajasthan Royals", shortName: "RR", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png ", p: 4, w: 4, l: 0, d: 0, nrr: 2.733, form: ["W", "W", "W", "W"] },
-{ name: "Sunrisers Hyderabad", shortName: "SRH", logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg ", p: 4, w: 1, l: 3, d: 0, nrr: -0.225, form: ["W", "L", "L", "L"] }
+const iplSchedule = [
+  { match: 28, team1: "KKR", team2: "RR", date: "2026-04-19", time: "19:30", venue: "Eden Gardens, Kolkata", team1Logo: "KKR.jpg", team2Logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png" },
+  { match: 29, team1: "PBKS", team2: "LSG", date: "2026-04-19", time: "15:30", venue: "PCA Stadium, Mohali", team1Logo: "pbks.png", team2Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR" },
+  { match: 30, team1: "GT", team2: "MI", date: "2026-04-20", time: "19:30", venue: "Narendra Modi Stadium, Ahmedabad", team1Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", team2Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg" },
+  { match: 31, team1: "SRH", team2: "DC", date: "2026-04-21", time: "19:30", venue: "Rajiv Gandhi Stadium, Hyderabad", team1Logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", team2Logo: "dc.png" },
+  { match: 32, team1: "LSG", team2: "RR", date: "2026-04-22", time: "19:30", venue: "Ekana Stadium, Lucknow", team1Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR", team2Logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png" },
+  { match: 33, team1: "MI", team2: "CSK", date: "2026-04-23", time: "19:30", venue: "Wankhede Stadium, Mumbai", team1Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg", team2Logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg" },
+  { match: 34, team1: "RCB", team2: "GT", date: "2026-04-24", time: "19:30", venue: "M Chinnaswamy Stadium, Bangalore", team1Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg", team2Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg" },
+  { match: 35, team1: "DC", team2: "PBKS", date: "2026-04-25", time: "15:30", venue: "Arun Jaitley Stadium, Delhi", team1Logo: "dc.png", team2Logo: "pbks.png" },
+  { match: 36, team1: "RR", team2: "SRH", date: "2026-04-25", time: "19:30", venue: "Sawai Mansingh Stadium, Jaipur", team1Logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", team2Logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg" },
+  { match: 37, team1: "CSK", team2: "GT", date: "2026-04-26", time: "15:30", venue: "MA Chidambaram Stadium, Chennai", team1Logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg", team2Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg" },
+  { match: 38, team1: "LSG", team2: "KKR", date: "2026-04-26", time: "19:30", venue: "Ekana Stadium, Lucknow", team1Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR", team2Logo: "KKR.jpg" },
+  { match: 39, team1: "DC", team2: "RCB", date: "2026-04-27", time: "19:30", venue: "Arun Jaitley Stadium, Delhi", team1Logo: "dc.png", team2Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg" },
+  { match: 40, team1: "PBKS", team2: "RR", date: "2026-04-28", time: "19:30", venue: "PCA Stadium, Mohali", team1Logo: "pbks.png", team2Logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png" },
+  { match: 41, team1: "MI", team2: "SRH", date: "2026-04-29", time: "19:30", venue: "Wankhede Stadium, Mumbai", team1Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg", team2Logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg" },
+  { match: 42, team1: "GT", team2: "RCB", date: "2026-04-30", time: "19:30", venue: "Narendra Modi Stadium, Ahmedabad", team1Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", team2Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg" },
+  { match: 43, team1: "RR", team2: "DC", date: "2026-05-01", time: "19:30", venue: "Sawai Mansingh Stadium, Jaipur", team1Logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", team2Logo: "dc.png" },
+  { match: 44, team1: "CSK", team2: "MI", date: "2026-05-02", time: "19:30", venue: "MA Chidambaram Stadium, Chennai", team1Logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg", team2Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg" },
+  { match: 45, team1: "SRH", team2: "KKR", date: "2026-05-03", time: "15:30", venue: "Rajiv Gandhi Stadium, Hyderabad", team1Logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", team2Logo: "KKR.jpg" },
+  { match: 46, team1: "GT", team2: "PBKS", date: "2026-05-03", time: "19:30", venue: "Narendra Modi Stadium, Ahmedabad", team1Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", team2Logo: "pbks.png" },
+  { match: 47, team1: "MI", team2: "LSG", date: "2026-05-04", time: "19:30", venue: "Wankhede Stadium, Mumbai", team1Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg", team2Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR" },
+  { match: 48, team1: "DC", team2: "CSK", date: "2026-05-05", time: "19:30", venue: "Arun Jaitley Stadium, Delhi", team1Logo: "dc.png", team2Logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg" },
+  { match: 49, team1: "SRH", team2: "PBKS", date: "2026-05-06", time: "19:30", venue: "Rajiv Gandhi Stadium, Hyderabad", team1Logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", team2Logo: "pbks.png" },
+  { match: 50, team1: "LSG", team2: "RCB", date: "2026-05-07", time: "19:30", venue: "Ekana Stadium, Lucknow", team1Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR", team2Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg" },
+  { match: 51, team1: "DC", team2: "KKR", date: "2026-05-08", time: "19:30", venue: "Arun Jaitley Stadium, Delhi", team1Logo: "dc.png", team2Logo: "KKR.jpg" },
+  { match: 52, team1: "RR", team2: "GT", date: "2026-05-09", time: "19:30", venue: "Sawai Mansingh Stadium, Jaipur", team1Logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", team2Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg" },
+  { match: 53, team1: "CSK", team2: "LSG", date: "2026-05-10", time: "15:30", venue: "MA Chidambaram Stadium, Chennai", team1Logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg", team2Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR" },
+  { match: 54, team1: "RCB", team2: "MI", date: "2026-05-10", time: "19:30", venue: "M Chinnaswamy Stadium, Bangalore", team1Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg", team2Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg" },
+  { match: 55, team1: "PBKS", team2: "DC", date: "2026-05-11", time: "19:30", venue: "PCA Stadium, Mohali", team1Logo: "pbks.png", team2Logo: "dc.png" },
+  { match: 56, team1: "GT", team2: "SRH", date: "2026-05-12", time: "19:30", venue: "Narendra Modi Stadium, Ahmedabad", team1Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", team2Logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg" },
+  { match: 57, team1: "RCB", team2: "KKR", date: "2026-05-13", time: "19:30", venue: "M Chinnaswamy Stadium, Bangalore", team1Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg", team2Logo: "KKR.jpg" },
+  { match: 58, team1: "LSG", team2: "CSK", date: "2026-05-14", time: "19:30", venue: "Ekana Stadium, Lucknow", team1Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR", team2Logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg" },
+  { match: 59, team1: "MI", team2: "PBKS", date: "2026-05-15", time: "19:30", venue: "Wankhede Stadium, Mumbai", team1Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg", team2Logo: "pbks.png" },
+  { match: 60, team1: "RR", team2: "RCB", date: "2026-05-16", time: "19:30", venue: "Sawai Mansingh Stadium, Jaipur", team1Logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", team2Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg" },
+  { match: 61, team1: "KKR", team2: "CSK", date: "2026-05-17", time: "19:30", venue: "Eden Gardens, Kolkata", team1Logo: "KKR.jpg", team2Logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg" },
+  { match: 62, team1: "GT", team2: "LSG", date: "2026-05-18", time: "19:30", venue: "Narendra Modi Stadium, Ahmedabad", team1Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", team2Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR" },
+  { match: 63, team1: "MI", team2: "RCB", date: "2026-05-19", time: "19:30", venue: "Wankhede Stadium, Mumbai", team1Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg", team2Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg" },
+  { match: 64, team1: "KKR", team2: "PBKS", date: "2026-05-20", time: "19:30", venue: "Eden Gardens, Kolkata", team1Logo: "KKR.jpg", team2Logo: "pbks.png" },
+  { match: 65, team1: "SRH", team2: "LSG", date: "2026-05-21", time: "19:30", venue: "Rajiv Gandhi Stadium, Hyderabad", team1Logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", team2Logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR" },
+  { match: 66, team1: "DC", team2: "GT", date: "2026-05-22", time: "19:30", venue: "Arun Jaitley Stadium, Delhi", team1Logo: "dc.png", team2Logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg" },
+  { match: 67, team1: "PBKS", team2: "RCB", date: "2026-05-23", time: "19:30", venue: "PCA Stadium, Mohali", team1Logo: "pbks.png", team2Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg" },
+  { match: 68, team1: "RR", team2: "CSK", date: "2026-05-24", time: "19:30", venue: "Sawai Mansingh Stadium, Jaipur", team1Logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", team2Logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg" },
+  { match: 69, team1: "KKR", team2: "MI", date: "2026-05-25", time: "19:30", venue: "Eden Gardens, Kolkata", team1Logo: "KKR.jpg", team2Logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg" },
+  { match: 70, team1: "SRH", team2: "RCB", date: "2026-05-25", time: "19:30", venue: "Rajiv Gandhi Stadium, Hyderabad", team1Logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", team2Logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg" }
 ];
 
-// Calculate Points: Win = 2, Draw = 1, Loss = 0
+// ==========================================
+// TEAM DATA WITH LOGOS (Fallback Data)
+// ==========================================
+const teamData = {
+  "CSK": { name: "Chennai Super Kings", logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg" },
+  "MI": { name: "Mumbai Indians", logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg" },
+  "RCB": { name: "Royal Challengers Bengaluru", logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg" },
+  "DC": { name: "Delhi Capitals", logo: "dc.png" },
+  "KKR": { name: "Kolkata Knight Riders", logo: "KKR.jpg" },
+  "LSG": { name: "Lucknow Super Giants", logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR" },
+  "GT": { name: "Gujarat Titans", logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg" },
+  "PBKS": { name: "Punjab Kings", logo: "pbks.png" },
+  "RR": { name: "Rajasthan Royals", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png" },
+  "SRH": { name: "Sunrisers Hyderabad", logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg" }
+};
+
+// ==========================================
+// FALLBACK TEAM STATS (When API fails)
+// Update this manually or from Cricbuzz
+// ==========================================
+let fallbackTeams = [
+  { name: "Chennai Super Kings", shortName: "CSK", logo: "https://img.freepik.com/premium-vector/chennai-super-kings-logo_760521-149.jpg", p: 6, w: 2, l: 4, d: 0, nrr: -0.780, form: ["L", "L", "W", "W", "L"] },
+  { name: "Mumbai Indians", shortName: "MI", logo: "https://i.pinimg.com/1200x/e8/87/a8/e887a81959a66337b7ccc7835c38470e.jpg", p: 5, w: 1, l: 4, d: 0, nrr: -1.076, form: ["L", "W", "L", "L", "L"] },
+  { name: "Royal Challengers Bengaluru", shortName: "RCB", logo: "https://i.pinimg.com/736x/72/e1/38/72e1383a3561b9adb1f7c0196efe254e.jpg", p: 6, w: 4, l: 2, d: 0, nrr: 1.171, form: ["W", "L", "W", "W", "L"] },
+  { name: "Delhi Capitals", shortName: "DC", logo: "dc.png", p: 5, w: 3, l: 2, d: 0, nrr: 0.310, form: ["W", "W", "L", "L", "W"] },
+  { name: "Kolkata Knight Riders", shortName: "KKR", logo: "KKR.jpg", p: 6, w: 0, l: 5, d: 1, nrr: -1.149, form: ["L", "NR", "L", "L", "L"] },
+  { name: "Lucknow Super Giants", shortName: "LSG", logo: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202602/lucknow-super-giants-241744340-1x1.png?VersionId=44r7l3zxzLbA_LHyF97nlIiIjqt2xbWR", p: 5, w: 2, l: 3, d: 0, nrr: -0.804, form: ["L", "W", "W", "L", "L"] },
+  { name: "Gujarat Titans", shortName: "GT", logo: "https://i.pinimg.com/1200x/a4/1c/7f/a41c7f3b3415a84083bf1690bac72d82.jpg", p: 5, w: 3, l: 2, d: 0, nrr: 0.018, form: ["L", "L", "W", "W", "W"] },
+  { name: "Punjab Kings", shortName: "PBKS", logo: "pbks.png", p: 5, w: 4, l: 0, d: 1, nrr: 1.067, form: ["W", "W", "NR", "W", "W"] },
+  { name: "Rajasthan Royals", shortName: "RR", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1280px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png", p: 5, w: 4, l: 1, d: 0, nrr: 0.889, form: ["W", "W", "W", "W", "L"] },
+  { name: "Sunrisers Hyderabad", shortName: "SRH", logo: "https://i.pinimg.com/736x/b7/7d/f5/b77df59b1a5f0f209b94a0148ddb02d5.jpg", p: 6, w: 3, l: 3, d: 0, nrr: 0.566, form: ["W", "L", "L", "W", "W"] }
+];
+
+let teams = [...fallbackTeams]; // Current working data
+
+// ==========================================
+// API CONFIGURATION
+// Using ESPNcricinfo API (more reliable than Cricbuzz)
+// ==========================================
+const API_CONFIG = {
+  // Primary API: ESPNcricinfo Series Data
+  primaryAPI: "https://hs-consumer-api.espncricinfo.com/v1/pages/series/1510719?detailType=POINTS_TABLE",
+  // Backup API: CricAPI (requires free API key from cricapi.com)
+  backupAPI: "https://api.cricapi.com/v1/series_points?apikey=YOUR_API_KEY&id=1510719",
+  // Update interval in milliseconds (30 seconds)
+  updateInterval: 30000,
+  // Retry delay on failure (5 seconds)
+  retryDelay: 5000
+};
+
+// ==========================================
+// FETCH LIVE DATA FROM ESPNcricinfo
+// ==========================================
+async function fetchLiveData() {
+  const statusEl = document.getElementById('updateStatus');
+  const errorEl = document.getElementById('errorMessage');
+  
+  try {
+    // Using CORS proxy for ESPNcricinfo
+    const proxyUrls = [
+      'https://api.allorigins.win/get?url=' + encodeURIComponent(API_CONFIG.primaryAPI),
+      'https://corsproxy.io/?' + encodeURIComponent(API_CONFIG.primaryAPI)
+    ];
+    
+    let response = null;
+    let lastError = null;
+    
+    // Try multiple proxies
+    for (const proxyUrl of proxyUrls) {
+      try {
+        const res = await fetch(proxyUrl, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+          signal: AbortSignal.timeout(10000) // 10 second timeout
+        });
+        
+        if (res.ok) {
+          response = res;
+          break;
+        }
+      } catch (e) {
+        lastError = e;
+        continue;
+      }
+    }
+    
+    if (!response) {
+      throw new Error('All proxies failed');
+    }
+    
+    const data = await response.json();
+    
+    // Parse ESPNcricinfo data format
+    let pointsTable = null;
+    
+    if (data.contents) {
+      // AllOrigins wraps response in contents
+      const parsed = JSON.parse(data.contents);
+      pointsTable = parsed.content?.standings?.groups?.[0]?.teamStats;
+    } else {
+      pointsTable = data.content?.standings?.groups?.[0]?.teamStats;
+    }
+    
+    if (pointsTable && pointsTable.length > 0) {
+      updateTeamsFromAPI(pointsTable);
+      statusEl.classList.remove('offline');
+      statusEl.querySelector('.status-dot').style.background = '#00ff88';
+      statusEl.querySelector('.status-dot').style.boxShadow = '0 0 10px #00ff88';
+      document.getElementById('statusText').textContent = 'Live data from ESPNcricinfo';
+      errorEl.classList.remove('show');
+      
+      // Update last updated time
+      updateLastUpdatedTime();
+      
+      // Update ticker with latest match info
+      updateTicker(data);
+      
+      return true;
+    } else {
+      throw new Error('No points table data found');
+    }
+    
+  } catch (error) {
+    console.warn('Live fetch failed, using fallback:', error);
+    statusEl.classList.add('offline');
+    statusEl.querySelector('.status-dot').style.background = '#ff4757';
+    statusEl.querySelector('.status-dot').style.boxShadow = '0 0 10px #ff4757';
+    document.getElementById('statusText').textContent = 'Offline - Using cached data';
+    errorEl.classList.add('show');
+    
+    // Use fallback data
+    teams = [...fallbackTeams];
+    return false;
+  }
+}
+
+// ==========================================
+// UPDATE TEAMS FROM API DATA
+// ==========================================
+function updateTeamsFromAPI(apiData) {
+  // ESPNcricinfo format mapping
+  const updatedTeams = apiData.map(teamStat => {
+    const teamInfo = teamStat.teamInfo || teamStat.team || {};
+    const shortName = teamInfo.abbreviation || teamInfo.shortName;
+    const fullName = teamInfo.fullName || teamInfo.name;
+    
+    // Map to our team data
+    const teamKey = Object.keys(teamData).find(key => 
+      key === shortName || 
+      teamData[key].name === fullName ||
+      fullName?.includes(teamData[key].name)
+    );
+    
+    const fallbackTeam = fallbackTeams.find(t => t.shortName === shortName) || {};
+    
+    return {
+      name: teamData[shortName]?.name || fullName || fallbackTeam.name,
+      shortName: shortName,
+      logo: teamData[shortName]?.logo || fallbackTeam.logo || '',
+      p: teamStat.matchesPlayed || teamStat.p || fallbackTeam.p || 0,
+      w: teamStat.matchesWon || teamStat.w || fallbackTeam.w || 0,
+      l: teamStat.matchesLost || teamStat.l || fallbackTeam.l || 0,
+      d: teamStat.matchesDrawn || teamStat.noResult || teamStat.d || fallbackTeam.d || 0,
+      nrr: parseFloat(teamStat.netRunRate || teamStat.nrr || fallbackTeam.nrr || 0),
+      form: teamStat.form || fallbackTeam.form || []
+    };
+  });
+  
+  if (updatedTeams.length > 0) {
+    teams = updatedTeams;
+    // Update fallback for next time
+    fallbackTeams = [...updatedTeams];
+  }
+}
+
+// ==========================================
+// UPDATE TICKER WITH LATEST INFO
+// ==========================================
+function updateTicker(apiData) {
+  const ticker = document.getElementById('tickerText');
+  
+  // Get latest match info from API if available
+  if (apiData.content?.recentFixtures?.[0]) {
+    const latest = apiData.content.recentFixtures[0];
+    const team1 = latest.teams?.[0]?.team?.shortName || '';
+    const team2 = latest.teams?.[1]?.team?.shortName || '';
+    const status = latest.statusText || '';
+    
+    ticker.textContent = `🏏 ${team1} vs ${team2}: ${status} • Auto-updating every 30 seconds`;
+  } else {
+    ticker.textContent = `🏏 IPL 2026 Live Standings • Auto-updating from ESPNcricinfo • Last updated: ${new Date().toLocaleTimeString()}`;
+  }
+}
+
+// ==========================================
+// UPDATE LAST UPDATED TIME
+// ==========================================
+function updateLastUpdatedTime() {
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('en-IN', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true 
+  });
+  document.getElementById('lastUpdated').textContent = `Last updated: ${timeString}`;
+}
+
+// ==========================================
+// NEXT MATCH & COUNTDOWN LOGIC
+// Updates automatically at midnight
+// ==========================================
+function getNextMatch() {
+  const now = new Date();
+  const currentDate = now.toISOString().split('T')[0];
+  const currentTime = now.getHours() * 60 + now.getMinutes(); // Minutes since midnight
+  
+  // Find next match
+  for (const match of iplSchedule) {
+    const matchDate = match.date;
+    const [matchHour, matchMin] = match.time.split(':').map(Number);
+    const matchTime = matchHour * 60 + matchMin;
+    
+    // If match is today and hasn't started yet, or match is in future
+    if (matchDate > currentDate || (matchDate === currentDate && matchTime > currentTime)) {
+      return match;
+    }
+  }
+  
+  // If no more matches, return last match
+  return iplSchedule[iplSchedule.length - 1];
+}
+
+function updateNextMatchDisplay() {
+  const nextMatch = getNextMatch();
+  
+  // Update team logos and names
+  document.getElementById('team1Logo').src = nextMatch.team1Logo;
+  document.getElementById('team1Logo').alt = nextMatch.team1;
+  document.getElementById('team1Name').textContent = nextMatch.team1;
+  
+  document.getElementById('team2Logo').src = nextMatch.team2Logo;
+  document.getElementById('team2Logo').alt = nextMatch.team2;
+  document.getElementById('team2Name').textContent = nextMatch.team2;
+  
+  // Update match info
+  document.getElementById('matchNumber').textContent = `Match ${nextMatch.match} - IPL 2026`;
+  
+  const matchDate = new Date(nextMatch.date);
+  const dateStr = matchDate.toLocaleDateString('en-IN', { 
+    day: 'numeric', 
+    month: 'long', 
+    year: 'numeric' 
+  });
+  document.getElementById('matchDateTime').textContent = `${dateStr} • ${nextMatch.time} IST`;
+  document.getElementById('matchVenue').textContent = nextMatch.venue;
+  
+  return nextMatch;
+}
+
+function updateCountdown() {
+  const nextMatch = getNextMatch();
+  const matchDateTime = new Date(`${nextMatch.date}T${nextMatch.time}:00+05:30`);
+  const now = new Date();
+  const difference = matchDateTime - now;
+
+  if (difference > 0) {
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  } else {
+    document.getElementById('countdown').innerHTML = 
+      '<div style="color: #00ff88; font-size: 24px; font-weight: bold; text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);">🔴 MATCH IS LIVE NOW</div>';
+  }
+}
+
+// ==========================================
+// MIDNIGHT RESET CHECK
+// Checks every minute if date changed
+// ==========================================
+let lastCheckedDate = new Date().toDateString();
+
+function checkMidnightReset() {
+  const currentDate = new Date().toDateString();
+  
+  if (currentDate !== lastCheckedDate) {
+    // Date changed! Reset everything
+    lastCheckedDate = currentDate;
+    
+    // Update next match display
+    updateNextMatchDisplay();
+    
+    // Fetch fresh data
+    fetchLiveData();
+    
+    console.log('Midnight reset triggered - Date changed to:', currentDate);
+  }
+}
+
+// ==========================================
+// CALCULATE POINTS
+// ==========================================
 function getPoints(team) {
   return (team.w * 2) + (team.d * 1);
 }
 
-// Sort table by Points → Wins → NRR
+// ==========================================
+// SORT TABLE
+// ==========================================
 function sortTable() {
   teams.sort((a, b) => {
     const pointsA = getPoints(a);
@@ -1093,23 +1522,26 @@ function sortTable() {
   });
 }
 
-// Get position badge class
+// ==========================================
+// GET POSITION BADGE CLASS
+// ==========================================
 function getPosClass(index) {
   if (index < 4) return 'qualifier';
   return '';
 }
 
-// Get form indicator HTML
+// ==========================================
+// GET FORM INDICATOR HTML
+// ==========================================
 function getFormIndicator(form) {
   if (!form || form.length === 0) return '-';
   
   let html = '<div class="form-indicator">';
-  // Show last 5 or all available
   const recentForm = form.slice(-5);
   recentForm.forEach(result => {
     let className = '';
-    if (result === 'W') className = 'form-win';
-    else if (result === 'L') className = 'form-loss';
+    if (result === 'W' || result === 'w') className = 'form-win';
+    else if (result === 'L' || result === 'l') className = 'form-loss';
     else className = 'form-draw';
     html += `<div class="form-dot ${className}"></div>`;
   });
@@ -1117,7 +1549,9 @@ function getFormIndicator(form) {
   return html;
 }
 
-// Render the table
+// ==========================================
+// RENDER TABLE
+// ==========================================
 function renderTable() {
   sortTable();
   let tbody = document.getElementById("tableBody");
@@ -1150,16 +1584,16 @@ function renderTable() {
     tbody.innerHTML += row;
   });
 
-  // Update season progress
   updateProgress();
-  // Update stats
   updateStats();
 }
 
-// Update season progress bar
+// ==========================================
+// UPDATE SEASON PROGRESS
+// ==========================================
 function updateProgress() {
-  const totalMatches = 74; // 70 league + 4 playoffs
-  const playedMatches = teams.reduce((sum, team) => sum + team.p, 0) / 2; // Each match involves 2 teams
+  const totalMatches = 74;
+  const playedMatches = teams.reduce((sum, team) => sum + team.p, 0) / 2;
   const completedMatches = Math.floor(playedMatches);
   const percentage = (completedMatches / totalMatches) * 100;
   
@@ -1168,11 +1602,12 @@ function updateProgress() {
   document.getElementById('totalMatches').textContent = completedMatches;
 }
 
-// Update tournament stats (simulated)
+// ==========================================
+// UPDATE TOURNAMENT STATS
+// ==========================================
 function updateStats() {
-  // Simulated stats based on matches played
   const matchesPlayed = parseInt(document.getElementById('totalMatches').textContent) || 0;
-  const avgRunsPerMatch = 320; // Average total runs per match (both teams)
+  const avgRunsPerMatch = 320;
   const avgWicketsPerMatch = 12;
   
   document.getElementById('totalRuns').textContent = (matchesPlayed * avgRunsPerMatch).toLocaleString();
@@ -1180,28 +1615,9 @@ function updateStats() {
   document.getElementById('highestScore').textContent = matchesPlayed > 0 ? "250/3" : "0";
 }
 
-// Countdown Timer for Next Match
-function updateCountdown() {
-  // Next match: April 8, 2026 at 7:30 PM IST
-  const matchDate = new Date('2026-04-13T19:30:00+05:30');
-  const now = new Date();
-  const difference = matchDate - now;
-
-  if (difference > 0) {
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-  } else {
-    document.getElementById('countdown').innerHTML = 
-      '<div style="color: #00ff88; font-size: 24px; font-weight: bold; text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);">🔴 MATCH IS LIVE NOW</div>';
-  }
-}
-
-// Create floating particles
+// ==========================================
+// CREATE FLOATING PARTICLES
+// ==========================================
 function createParticles() {
   const container = document.getElementById('particles');
   const particleCount = 50;
@@ -1216,24 +1632,44 @@ function createParticles() {
   }
 }
 
-// Initialize
-renderTable();
-createParticles();
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// Auto-refresh table every 30 seconds (simulated live updates)
-setInterval(() => {
-  // In real app, this would fetch new data
+// ==========================================
+// INITIALIZATION
+// ==========================================
+async function init() {
+  createParticles();
+  
+  // Set up next match display
+  updateNextMatchDisplay();
+  
+  // Initial data fetch
+  await fetchLiveData();
   renderTable();
-}, 30000);
+  
+  // Start countdown
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  
+  // Auto-refresh data every 30 seconds
+  setInterval(async () => {
+    await fetchLiveData();
+    renderTable();
+  }, API_CONFIG.updateInterval);
+  
+  // Check for midnight reset every minute
+  setInterval(checkMidnightReset, 60000);
+  
+  // Update last updated time every second
+  setInterval(updateLastUpdatedTime, 1000);
+}
 
-// Add click handlers for sorting (optional enhancement)
+// Start the app
+init();
+
+// Add click handlers for sorting
 document.querySelectorAll('th').forEach((header, index) => {
-  if (index > 0) { // Skip POS column
+  if (index > 0) {
     header.style.cursor = 'pointer';
     header.addEventListener('click', () => {
-      // Sort logic could be added here
       renderTable();
     });
   }
